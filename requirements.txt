@@ -1,0 +1,2 @@
+fastapi==0.99.1
+mysql_connector_repackaged==0.3.1
