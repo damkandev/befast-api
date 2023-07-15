@@ -18,7 +18,3 @@ app.add_middleware(
 @app.get("/api/")
 def raiz():
     return {"Hola": " Molto Deli"}
-
-
-test = Usuarios.iniciarSesion("juan@gmail.com", "jfihfuhsdf")
-print(test)
