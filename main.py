@@ -18,3 +18,9 @@ app.add_middleware(
 @app.get("/api/")
 def raiz():
     return {"Hola": " Molto Deli"}
+
+
+@app.post("/api/usuario")
+async def registrarUsuario(request: Request):
+    datos = await request.json()
+    nombre = str()
