@@ -1,19 +1,19 @@
-![MoltodeliApi Banner](./assets/images/banner.jpg)
+![BeFast Banner](./assets/images/banner.jpg)
 
-La API de Moltodeli creada con Python con colaboración de [Kanna](https://github.com/bony24).
+La API de BeFast creada con Python con colaboración de [Kanna](https://github.com/bony24) y Kurizu.
 
 ## Iniciando el proyecto
 
 Antes de empezar con todo el código lo primero es iniciar el programa para poder hacer las pruebas de la forma que más te pueda acomodar, por lo que lo haremos de una forma sencilla, lo primero sera clonar el repositorio en nuestro equipo lo que se hace de la siguiente manera.
 
 ```git
-git clone https://github.com/damkandev/moltodeli-api.git
+git clone https://github.com/damkandev/befast-api.git
 ```
 
 una vez lo hayamos clonado lo que haremos sera ingresar al directorio usando el tradicional comando de change directory:
 
 ```console
-cd ./moltodeli-api
+cd ./befast-api
 ```
 
 y lo primero sera instalar los requerimientos que nos pedira python haciendo uso del siguiente comando:

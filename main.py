@@ -17,7 +17,7 @@ app.add_middleware(
 # Raiz
 @app.get("/api/")
 def raiz():
-    return {"Hola": " Molto Deli"}
+    return {"Hola": "BeFast"}
 
 
 @app.post("/api/usuario")
