@@ -53,6 +53,7 @@ class Usuarios:
         contrasenaValida = False
         resultado = connection.consultaDB(query, 2, parametros)
         contrasenaDesencriptada = desencriptar(resultado[0][3], cargar_clave())
+        # print(resultado[0][3])
         if str(contrasenaDesencriptada, "utf8") == contrasena:
             contrasenaValida = True
         else:
@@ -63,4 +64,13 @@ class Usuarios:
             token = generar_token(user_id)
             return {"token": token}
         else:
-            return {"error": "Credenciales inválidas"}
+            return {"error": "locoooo errooooooooooooooor"}
+
+
+#
+# if contrasenaValida:
+#    user_id = resultado[0][0]
+#    token = generar_token(user_id)
+#    return {"token": token}
+# else:
+#    return {"error": "Credenciales inválidas"}

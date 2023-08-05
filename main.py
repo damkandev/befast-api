@@ -32,6 +32,5 @@ async def login(request: Request):
     datos = await request.json()
     correo = datos.get("correo")
     contrasena = datos.get("contrasena")
-    print(correo, contrasena)
     resultado = Usuarios.iniciarSesion(correo, contrasena)
     return resultado
