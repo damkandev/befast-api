@@ -5,6 +5,7 @@ from handler.usuarios import handleUsers
 
 
 app = FastAPI()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -24,3 +25,13 @@ def raiz():
 async def registrarUsuario(request: Request):
     datos = await request.json()
     nombre = str()
+
+
+@app.post("/api/login")
+async def login(request: Request):
+    datos = await request.json()
+    correo = datos.get("correo")
+    contrasena = datos.get("contrasena")
+    print(correo, contrasena)
+    resultado = Usuarios.iniciarSesion(correo, contrasena)
+    return resultado

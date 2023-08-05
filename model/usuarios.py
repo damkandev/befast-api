@@ -3,6 +3,8 @@ from connection.connection import Conecction
 from dotenv import load_dotenv
 from cryptography.fernet import Fernet
 import base64
+from passlib.hash import bcrypt
+from jose import jwt
 
 connection = Conecction()
 
@@ -26,6 +28,14 @@ def desencriptar(contrasena, clave):
     return cd
 
 
+def generar_token(usuario_id):
+    secret_key = os.getenv("SECRET_KEY")
+    algorithm = "HS256"
+    payload = {"user_id": usuario_id}
+    token = jwt.encode(payload, secret_key, algorithm)
+    return token
+
+
 class Usuarios:
     def registrarUsuario(nombre, correo, contrasena):
         contrasenaEncriptada = encriptar(contrasena, cargar_clave())
@@ -47,4 +57,10 @@ class Usuarios:
             contrasenaValida = True
         else:
             contrasenaValida = False
-        return contrasenaValida
+
+        if contrasenaValida:
+            user_id = resultado[0][0]
+            token = generar_token(user_id)
+            return {"token": token}
+        else:
+            return {"error": "Credenciales inválidas"}
