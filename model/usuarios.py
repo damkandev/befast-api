@@ -10,6 +10,8 @@ connection = Conecction()
 
 load_dotenv()
 
+# Funciones de Encriptación
+
 
 def cargar_clave():
     clave = os.getenv("CLAVE_ENCRIPTACION").encode()
@@ -64,4 +66,4 @@ class Usuarios:
             token = generar_token(user_id)
             return {"token": token}
         else:
-            return {"error": "locoooo errooooooooooooooor"}
+            return {"error": "error"}

@@ -15,17 +15,20 @@ app.add_middleware(
 )
 
 
+# Raiz
 @app.get("/api/")
 def raiz():
     return {"Hola": "BeFast"}
 
 
+# Registrar Usuario
 @app.post("/api/usuario")
 async def registrarUsuario(request: Request):
     datos = await request.json()
     nombre = str()
 
 
+# Inicio de Sesión
 @app.post("/api/login")
 async def login(request: Request):
     datos = await request.json()
