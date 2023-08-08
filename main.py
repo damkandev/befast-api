@@ -15,7 +15,6 @@ app.add_middleware(
 )
 
 
-# Raiz
 @app.get("/api/")
 def raiz():
     return {"Hola": "BeFast"}
