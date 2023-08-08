@@ -1,28 +1,38 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from model.usuarios import Usuarios
-from handler.usuarios import handleUsers 
+from handler.usuarios import handleUsers
+
 
 app = FastAPI()
+
 app.add_middleware(
-    CORSMiddleware, 
-    allow_origins = ["*"],
-    allow_credentials = True,
-    allow_methods = ["*"],
-    allow_headers= ["*"],
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
 
 # Raiz
 @app.get("/api/")
-def buscarUsuarios():
-    return {"Hola":" Molto Deli"}
+def raiz():
+    return {"Hola": "BeFast"}
 
-# Usuarios
-@app.get("/api/usuarios")
-def buscarUsuarios():
-    usuarios = handleUsers.buscarUsuarios()
-    return usuarios
 
-@app.get("/api/usuario/{id}")
-def buscarUsuario(id):
-    usuarioBuscado = handleUsers.buscarUsuario()
+# Registrar Usuario
+@app.post("/api/usuario")
+async def registrarUsuario(request: Request):
+    datos = await request.json()
+    nombre = str()
+
+
+# Inicio de Sesión
+@app.post("/api/login")
+async def login(request: Request):
+    datos = await request.json()
+    correo = datos.get("correo")
+    contrasena = datos.get("contrasena")
+    resultado = Usuarios.iniciarSesion(correo, contrasena)
+    return resultado
