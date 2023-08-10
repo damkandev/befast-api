@@ -19,12 +19,11 @@
 <body data-bs-theme="dark">
   <br>
   <div class="container d-flex flex-wrap align-items-center">
-    <h1>Estudiantes</h1>
+    <h1>Inspectores</h1>
     <table id="myTable" class="table">
       <thead>
         <tr>
           <th scope="col">id</th>
-          <th scope="col">curso</th>
           <th scope="col">nombres</th>
           <th scope="col">apellido_p</th>
           <th scope="col">apellido_m</th>
@@ -40,7 +39,7 @@
     </table>
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrear">
-      Crear Estudiante
+      Crear Inspector
     </button>
 
   </div>
@@ -54,7 +53,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Para crear un <b>Estudiante</b> rellena los siguientes campos que tendras a continuación:</p>
+          <p>Para crear un <b>Inspector</b> rellena los siguientes campos que tendras a continuación:</p>
           <form action="crear">
             <label for="nombres">Nombres (Ej: Jose Juan): </label>
             <input class="form-control" type="text" name="nombres" id="nombres">
@@ -74,7 +73,7 @@
             <label for="direccion">Direccion (Ej: Jorge Andreda 300): </label>
             <input class="form-control" type="text" name="direccion" id="direccion">
 
-            <button type="button" class="btn btn-primary" id="crearEstudianteBtn">Crear Estudiante</button>
+            <button type="button" class="btn btn-primary" id="crearInspectorBtn">Crear Inspector</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -145,23 +144,22 @@
 <script>
   function updateTable() {
     $.ajax({
-      url: "http://localhost:8000/api/estudiantes",
+      url: "http://localhost:8000/api/inspectores",
       type: "GET",
       contentType: "application/json ; charset=utf8",
       dataType: "json",
       success: function (response) {
         var tabla = $('#myTable > tbody:last-child')
         tabla.empty()
-        response.forEach(estudiantes => {
-          var id = estudiantes.id;
-          var idcurso = estudiantes.idcurso;
-          var nombres = estudiantes.nombres;
-          var apellido_p = estudiantes.apellido_p;
-          var apellido_m = estudiantes.apellido_m;
-          var rut = estudiantes.rut;
-          var telefono = estudiantes.telefono;
-          var direccion = estudiantes.direccion
-          var fila = '<tr class="fila">' + '<td class="id">' + id + '</td>' + '<td>' + idcurso + '</td>' + '<td>' + nombres + '</td>' + '<td>' + apellido_p + '</td>' + '<td>' + apellido_m + '</td>' + '<td>' + rut + '</td>' + '<td>' + telefono + '</td>' + '<td>' + direccion + '</td>' + '<td><button class="btn btn-success btn-ver" onclick="btnVer()"><i class="fas fa-eye"></i></button> <button onclick="btnEditarModal()" class="btn btn-warning btn-editar"><i class="fas fa-edit"></i></button> <button class="btn btn-danger btn-borrar" onclick="btnBorrar()"><i class="fas fa-trash"></i></button></td>' + '<tr>'
+        response.forEach(inspectores => {
+          var id = inspectores.id;
+          var nombres = inspectores.nombres;
+          var apellido_p = inspectores.apellido_p;
+          var apellido_m = inspectores.apellido_m;
+          var rut = inspectores.rut;
+          var telefono = inspectores.telefono;
+          var direccion = inspectores.direccion
+          var fila = '<tr class="fila">' + '<td class="id">' + id + '</td>' + '<td>' + nombres + '</td>' + '<td>' + apellido_p + '</td>' + '<td>' + apellido_m + '</td>' + '<td>' + rut + '</td>' + '<td>' + telefono + '</td>' + '<td>' + direccion + '</td>' + '<td><button class="btn btn-success btn-ver" onclick="btnVer()"><i class="fas fa-eye"></i></button> <button onclick="btnEditarModal()" class="btn btn-warning btn-editar"><i class="fas fa-edit"></i></button> <button class="btn btn-danger btn-borrar" onclick="btnBorrar()"><i class="fas fa-trash"></i></button></td>' + '<tr>'
           tabla.append(fila)
         })
       }
@@ -171,7 +169,7 @@
   updateTable()
 
 
-  $('#crearEstudianteBtn').click(() => {
+  $('#crearInspectorBtn').click(() => {
     var nombres = $('#nombres').val()
     var apellido_p = $('#apellido_p').val()
     var apellido_m = $('#apellido_m').val()
@@ -189,7 +187,7 @@
     }
 
     $.ajax({
-      url: "http://localhost:8000/api/estudiante/",
+      url: "http://localhost:8000/api/inspector/",
       type: "POST",
       contentType: "application/json ; charset=utf8",
       data: JSON.stringify(datos),
@@ -208,7 +206,7 @@
 
 
     $.ajax({
-      url: `http://localhost:8000/api/estudiante/${id}`,
+      url: `http://localhost:8000/api/inspector/${id}`,
       type: "GET",
       contentType: "application/json ; charset=utf8",
       dataType: "json",
@@ -245,7 +243,7 @@
       }
 
       $.ajax({
-        url: `http://127.0.0.1:8000/api/estudiante/${id}`,
+        url: `http://127.0.0.1:8000/api/inspector/${id}`,
         type: "PUT",
         contentType: "application/json ; charset=utf8",
         dataType: "json",
@@ -269,7 +267,7 @@
     }
 
     $.ajax({
-      url: `http://127.0.0.1:8000/api/estudiante/${id}`,
+      url: `http://127.0.0.1:8000/api/inspector/${id}`,
       type: "DELETE",
       data: JSON.stringify(datos),
       contentType: "application/json ; charset=utf8",

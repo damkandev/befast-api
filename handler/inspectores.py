@@ -1,0 +1,37 @@
+from model.inspectores import inspectores
+
+
+class handleInspectores:
+    def __init__(self, id, nombre):
+        self.id = id
+        self.nombre = nombre
+
+    def buscarInspectores():
+        datos = inspectores.buscarInspectores()
+        Inspectores = []
+        for inspector in datos:
+            _inspector = {
+                "id": inspector[0],
+                "nombres": inspector[1],
+                "apellido_p": inspector[2],
+                "apellido_m": inspector[3],
+                "rut": inspector[4],
+                "telefono": inspector[5],
+                "direccion": inspector[6],
+            }
+            Inspectores.append(_inspector)
+        return Inspectores
+
+    def buscarInspector(id):
+        inspectorBuscado = {}
+        informacionInspector = inspectores.buscarInspector(id)
+        for info in informacionInspector:
+            inspectorBuscado = {
+                "nombres": info[0],
+                "apellido_p": info[1],
+                "apellido_m": info[2],
+                "rut": info[3],
+                "telefono": info[4],
+                "direccion": info[5],
+            }
+        return inspectorBuscado

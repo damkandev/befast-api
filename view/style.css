@@ -6,3 +6,13 @@ iframe{
 .container{
   height: 100vh !important;
 }
+
+button{
+  background-color:  #7f1416 !important;
+  border:0px;
+}
+
+.btn-primary{
+  background-color:  #7f1416 !important;
+  border:0px;
+}

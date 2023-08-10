@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-bs-theme="dark">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">BeFast</a>
@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Cerrar Sesión</a>
+            <a class="nav-link active" aria-current="page" id="cerrarSesion" href="#">Cerrar Sesión</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -30,8 +30,8 @@
               Categorias
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Estudiantes</a></li>
-              <li><a class="dropdown-item" href="#">Inspectores</a></li>
+              <li><a class="dropdown-item" target="iframe" href="./categorias/estudiantes.html">Estudiantes</a></li>
+              <li><a class="dropdown-item" target="iframe" href="./categorias/inspectores.html">Inspectores</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -45,18 +45,27 @@
     </div>
   </nav>
 
-  <iframe src="./categorias/general.html" frameborder="0"></iframe>
+  <iframe id="iframe" name="iframe" src="./categorias/general.html" frameborder="0"></iframe>
 
 
   <script>
     // Verificar si hay un token almacenado en sessionStorage
     const token = sessionStorage.getItem('token');
 
-    if (!token) {
-      document.addEventListener('DOMContentLoaded', function (event) {
-        alert("no hay token")
-      })
+    function checkToken() {
+      if (!token) {
+        document.addEventListener('DOMContentLoaded', function (event) {
+          window.location.href = "./index.html"
+        })
+      }
     }
+
+    checkToken()
+
+    document.getElementById('cerrarSesion').addEventListener('click', () => {
+      checkToken()
+      sessionStorage.clear()
+    })
   </script>
 </body>
 
