@@ -55,6 +55,12 @@ def buscarEstudiante(id):
     return estudianteBuscado
 
 
+@app.get("/api/estudianteyapoderado/{id}")
+def buscarEYA(id):
+    eyabuscado = handleEstudiantes.buscarEstudianteYApoderados(id)
+    return eyabuscado
+
+
 @app.post("/api/estudiante")
 async def crearEstudiante(request: Request):
     datos = await request.json()
@@ -64,6 +70,7 @@ async def crearEstudiante(request: Request):
     rut = int(datos["rut"])
     telefono = int(datos["telefono"])
     direccion = str(datos["direccion"])
+    print(datos)
     print(
         estudiantes.crearEstudiante(
             nombres, apellido_p, apellido_m, rut, telefono, direccion

@@ -66,4 +66,4 @@ class Usuarios:
             token = generar_token(user_id)
             return {"token": token}
         else:
-            return {"error": "error"}
+            return {"token": "error"}

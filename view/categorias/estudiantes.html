@@ -13,36 +13,70 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
-
+  <link rel="stylesheet" href="./css/estudiantes.css">
 </head>
 
 <body data-bs-theme="dark">
   <br>
-  <div class="container d-flex flex-wrap align-items-center">
-    <h1>Estudiantes</h1>
-    <table id="myTable" class="table">
-      <thead>
-        <tr>
-          <th scope="col">id</th>
-          <th scope="col">curso</th>
-          <th scope="col">nombres</th>
-          <th scope="col">apellido_p</th>
-          <th scope="col">apellido_m</th>
-          <th scope="col">rut</th>
-          <th scope="col">telefono</th>
-          <th scope="col">direccion</th>
-          <th scope="col">opciones</th>
-        </tr>
-      </thead>
-      <tbody>
+  <div class="contenedor">
+    <div class="contenedor-tabla">
+      <h1>Estudiantes</h1>
+      <table id="myTable" class="table-sm table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">curso</th>
+            <th scope="col">nombres</th>
+            <th scope="col">apellido_p</th>
+            <th scope="col">opciones</th>
+          </tr>
+        </thead>
+        <tbody>
 
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrear">
+        Crear Estudiante
+      </button>
+    </div>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrear">
-      Crear Estudiante
-    </button>
+    <div class="ficha hide">
+      <div class="estudiante-card">
+        <img src="../images/avatar.png" alt="">
+        <div class="info">
+          <p class="titulo" id="nombre-estudiante">Damián Alberto Panes Lobos</p>
+          <p class="descripcion"><span id="rut-estudiante">21.932.498-7</span> | <span
+              id="contacto-estudiante">+56940806215</span>
+            | <span id="nivel-estudiante">4F</span>
+          </p>
+          <div class="buttons">
+            <button class="primary-btn">Ver Atrasos</button>
+            <button class="secondary-btn" onclick="btnEditarModal()">Editar</button>
+          </div>
+        </div>
 
+
+      </div>
+      <div class="apoderados-card">
+        <p class="apoderado-ptitle">Apoderado Principal</p>
+        <p class="apoderado-pstitle">Nombre Apoderado</p>
+        <p class="apoderado-pdato" id="nombre-apoderado-principal">Ines Estrella Lobos Ruiz</p>
+        <p class="apoderado-pstitle">Dirección Apoderado</p>
+        <p class="apoderado-pdato" id="direccion-apoderado-principal">Luis Araneda 1206, Chillán Viejo</p>
+        <p class="apoderado-pstitle">Número de Telefono</p>
+        <p class="apoderado-pdato" id="telefono-apoderado-principal">+56 9 1234 5678</p>
+        <p class="apoderado-ptitle">Apoderado Suplente</p>
+        <p class="apoderado-pstitle">Nombre Apoderado</p>
+        <p class="apoderado-pdato" id="nombre-apoderado-suplente">Robnaldo Gustavo Panes Castro</p>
+        <p class="apoderado-pstitle">Dirección Apoderado</p>
+        <p class="apoderado-pdato" id="direccion-apoderado-suplente">Luis Araneda 1206, Chillán Viejo</p>
+        <p class="apoderado-pstitle">Número de Telefono</p>
+        <p class="apoderado-pdato" id="telefono-apoderado-suplente">+56 9 1234 5678</p>
+      </div>
+      <div class="buttons-bottom">
+        <button class="primary-btn" onclick="btnBorrar()">Eliminar Alumno</button>
+      </div>
+    </div>
   </div>
 
   <!-- Modal Crear Estudiante -->
@@ -66,7 +100,7 @@
             <input class="form-control" type="text" name="apellido_m" id="apellido_m">
 
             <label for="rut">R.U.T (Ej: 123456789): </label>
-            <input class="form-control" type="text" name="rut" id="rut">
+            <input class="form-control" type="text" name="rut" id="rutcrear">
 
             <label for="telefono">Telefono (Ej: 912345678): </label>
             <input class="form-control" type="text" name="telefono" id="telefono">
@@ -141,145 +175,10 @@
       </div>
     </div>
   </div>
+
+  <script src="../js/estudiantes.js"></script>
+
 </body>
-<script>
-  function updateTable() {
-    $.ajax({
-      url: "http://localhost:8000/api/estudiantes",
-      type: "GET",
-      contentType: "application/json ; charset=utf8",
-      dataType: "json",
-      success: function (response) {
-        var tabla = $('#myTable > tbody:last-child')
-        tabla.empty()
-        response.forEach(estudiantes => {
-          var id = estudiantes.id;
-          var idcurso = estudiantes.idcurso;
-          var nombres = estudiantes.nombres;
-          var apellido_p = estudiantes.apellido_p;
-          var apellido_m = estudiantes.apellido_m;
-          var rut = estudiantes.rut;
-          var telefono = estudiantes.telefono;
-          var direccion = estudiantes.direccion
-          var fila = '<tr class="fila">' + '<td class="id">' + id + '</td>' + '<td>' + idcurso + '</td>' + '<td>' + nombres + '</td>' + '<td>' + apellido_p + '</td>' + '<td>' + apellido_m + '</td>' + '<td>' + rut + '</td>' + '<td>' + telefono + '</td>' + '<td>' + direccion + '</td>' + '<td><button class="btn btn-success btn-ver" onclick="btnVer()"><i class="fas fa-eye"></i></button> <button onclick="btnEditarModal()" class="btn btn-warning btn-editar"><i class="fas fa-edit"></i></button> <button class="btn btn-danger btn-borrar" onclick="btnBorrar()"><i class="fas fa-trash"></i></button></td>' + '<tr>'
-          tabla.append(fila)
-        })
-      }
-    })
-  }
-
-  updateTable()
-
-
-  $('#crearEstudianteBtn').click(() => {
-    var nombres = $('#nombres').val()
-    var apellido_p = $('#apellido_p').val()
-    var apellido_m = $('#apellido_m').val()
-    var rut = $('#rut').val()
-    var telefono = $('#telefono').val()
-    var direccion = $('#direccion').val()
-
-    var datos = {
-      "nombres": nombres,
-      "apellido_p": apellido_p,
-      "apellido_m": apellido_m,
-      "rut": rut,
-      "telefono": telefono,
-      "direccion": direccion
-    }
-
-    $.ajax({
-      url: "http://localhost:8000/api/estudiante/",
-      type: "POST",
-      contentType: "application/json ; charset=utf8",
-      data: JSON.stringify(datos),
-      success: function (response) {
-        updateTable()
-
-      }
-    })
-  })
-
-  function btnVer() {
-    var button = event.target
-    var row = button.closest('tr')
-    var idElement = row.querySelector('.id')
-    var id = idElement.textContent;
-
-
-    $.ajax({
-      url: `http://localhost:8000/api/estudiante/${id}`,
-      type: "GET",
-      contentType: "application/json ; charset=utf8",
-      dataType: "json",
-      success: (response) => {
-        $('#tituloModal').html(response.nombres);
-        $('#contenidoModal').html(`<b>Nombres:</b>\n ${response.nombres}\n<b>Apellido Paterno:</b>\n ${response.apellido_p}\n<b>Apellido Materno:</b> \n${response.apellido_m}\n<b>RUT:</b> \n${response.rut}\n<b>Telefono:</b>\n ${response.telefono}\n<b>Dirección:</b>\n ${response.direccion}`);
-        $('#modalVer').modal('show');
-      }
-    });
-  }
-
-  function btnEditarModal() {
-    var button = event.target
-    var row = button.closest('tr')
-    var idElement = row.querySelector('.id')
-    var id = idElement.textContent;
-    $('#modalEditar').modal('show')
-    $('#editarBtn').click(() => {
-      console.log(id);
-      var nombres = $('#Enombres').val()
-      var apellido_p = $('#Eapellido_p').val()
-      var apellido_m = $('#Eapellido_m').val()
-      var rut = $('#Erut').val()
-      var telefono = $('#Etelefono').val()
-      var direccion = $('#Edireccion').val()
-      var datos = {
-        "id": id,
-        "nombres": nombres,
-        "apellido_p": apellido_p,
-        "apellido_m": apellido_m,
-        "rut": rut,
-        "telefono": telefono,
-        "direccion": direccion
-      }
-
-      $.ajax({
-        url: `http://127.0.0.1:8000/api/estudiante/${id}`,
-        type: "PUT",
-        contentType: "application/json ; charset=utf8",
-        dataType: "json",
-        data: JSON.stringify(datos),
-        success: (response) => {
-          $('#exampleModal').modal('show');
-          updateTable()
-        }
-      });
-    })
-  }
-
-  function btnBorrar() {
-    var button = event.target
-    var row = button.closest('tr')
-    var idElement = row.querySelector('.id')
-    var id = idElement.textContent;
-
-    var datos = {
-      "id": id
-    }
-
-    $.ajax({
-      url: `http://127.0.0.1:8000/api/estudiante/${id}`,
-      type: "DELETE",
-      data: JSON.stringify(datos),
-      contentType: "application/json ; charset=utf8",
-      dataType: "json",
-      success: (response) => {
-        updateTable()
-      }
-    });
-  }
-</script>
 
 
 </html>

@@ -21,6 +21,16 @@ class estudiantes:
         conexionBD.desconectar()
         return resultado
 
+    def buscarEstudianteYApoderados(id):
+        query = "select e.idestudiante, e.idcurso, e.nombres as estudiante_nombre, e.apellido_p as estudiante_apellido_p, e.apellido_m as estudiante_apellido_m, e.rut as estudiante_rut, e.telefono as estudiante_telefono, e.direccion as estudiante_direccion, e.idapoderado, e.idapoderadosup, e.avatar, a.nombres as apoderado_nombres, a.apellido_p as apoderado_apellido_p, a.apellido_m as apoderado_apellido_m, a.telefono as apoderado_telefono, a.rut as apoderado_rut, asup.nombres as apoderadosup_nombres, asup.apellido_p as apoderadosup_apellido_p, asup.apellido_m as idapoderadosup_apellido_m, asup.telefono as apoderadosup_telefono, asup.rut as apoderadosup_rut from estudiante e left join apoderado a on e.idapoderado = a.idapoderado left join apoderadosup asup on e.idapoderadosup = asup.idapoderadosup where idestudiante = %s"
+        parametros = (id,)
+        tipoConsulta = 2
+        conexionBD = Conecction()
+        conexionBD.conectar()
+        resultado = conexionBD.consultaDB(query, tipoConsulta, parametros)
+        conexionBD.desconectar()
+        return resultado
+
     def crearEstudiante(nombres, apellido_p, apellido_m, rut, telefono, direccion):
         query = "INSERT INTO estudiante (nombres,apellido_p,apellido_m,rut,telefono,direccion) VALUES (%s,%s,%s,%s,%s,%s);"
         tipoConsulta = 1

@@ -7,7 +7,7 @@ iframe{
   height: 100vh !important;
 }
 
-button{
+button .btn{
   background-color:  #7f1416 !important;
   border:0px;
 }
@@ -15,4 +15,42 @@ button{
 .btn-primary{
   background-color:  #7f1416 !important;
   border:0px;
+}
+
+.customnavbar{
+  position: fixed;
+  width: 4.3125rem;
+  height: 23.5rem;
+  background-color: #1113157e;
+  border-radius: 12px;
+  margin-left: 1em;
+  margin-top: 19vh;
+}
+
+.customnavbar .logo{
+  height: 2em;
+  margin-left: 1.3em;
+  margin-top: 1.3em;
+}
+
+.customnavbar .buttons ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 2em;
+}
+
+.customnavbar .buttons li a{
+  display: block;
+  margin-left: .6em;
+  margin-top: 1em;
+  background-color: #2527297e;
+  width: 3.2em;
+  padding: 5px;
+  border-radius: 12px;
+  transition: background .3s;
+}
+
+.customnavbar .buttons li a:hover{
+  background-color: #7f1416;
 }

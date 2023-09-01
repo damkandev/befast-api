@@ -12,60 +12,29 @@
 </head>
 
 <body data-bs-theme="dark">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">BeFast</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" id="cerrarSesion" href="#">Cerrar Sesión</a>
-          </li>
+  <nav class="customnavbar">
+    <img src="./images/logo.svg" alt="" class="logo">
+    <div class="buttons">
+      <ul>
+        <li><a href="./categorias/estudiantes.html" target="iframe"><img src="./images/alumnos.svg" alt=""
+              class="icon i-alumnos"></a></li>
+        <li><a href="./categorias/inspectores.html" target="iframe"><img src="./images/inspectores.svg" alt=""
+              class="icon i-inspectores"></a></li>
+        <li><a href="#" target="iframe" id="btnCerrarSesion"><img src="./images/cerrarSesion.svg" alt=""
+              class="icon i-cerrarSesion"></a></li>
+        <li><a href="#" target="iframe"><img src="./images/avatar.png" </a></li>
+      </ul>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categorias
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" target="iframe" href="./categorias/estudiantes.html">Estudiantes</a></li>
-              <li><a class="dropdown-item" target="iframe" href="./categorias/inspectores.html">Inspectores</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-          </li>
-        </ul>
 
-      </div>
+
     </div>
   </nav>
 
   <iframe id="iframe" name="iframe" src="./categorias/general.html" frameborder="0"></iframe>
 
 
-  <script>
-    // Verificar si hay un token almacenado en sessionStorage
-    const token = sessionStorage.getItem('token');
+  <script src="./js/checkToken.js">
 
-    function checkToken() {
-      if (!token) {
-        document.addEventListener('DOMContentLoaded', function (event) {
-          window.location.href = "./index.html"
-        })
-      }
-    }
-
-    checkToken()
-
-    document.getElementById('cerrarSesion').addEventListener('click', () => {
-      checkToken()
-      sessionStorage.clear()
-    })
   </script>
 </body>
 

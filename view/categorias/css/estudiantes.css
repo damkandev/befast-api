@@ -1,0 +1,126 @@
+.contenedor {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contenedor-tabla {
+  margin-top: 2em;
+  margin-left: 12vw;
+}
+
+#myTable {
+  margin-top: 1em;
+  border-color: #5a5a5a;
+  margin-bottom: 2em;
+  border-radius: 12px !important;
+}
+
+.contenedor .ficha {
+  background-color: #1717187e;
+  width: 40vw;
+  height: 120vh;
+  border-radius: 12px;
+  margin-right: 12vw;
+  margin-bottom: 2em;
+  display: flow-root;
+}
+
+.contenedor .ficha .estudiante-card {
+  background-color: #171718ee;
+  margin: 1em;
+  border-radius: 12px;
+  display: flex;
+}
+
+.contenedor .ficha .estudiante-card img {
+  width: 8em;
+  height: 8em;
+  margin: 0.8em;
+}
+
+.contenedor .ficha .estudiante-card .info {
+  margin-right: 1em;
+  margin-top: 1em;
+}
+
+.contenedor .ficha .estudiante-card .info .titulo {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.contenedor .ficha .estudiante-card .info .descripcion {
+  color: rgba(250, 250, 250, 0.349);
+}
+
+.contenedor .ficha .estudiante-card .info .buttons .primary-btn {
+  border: none;
+  background-color: #7f1416;
+  padding: 0.6em 1.5em;
+  border-radius: 5px;
+  margin-right: 0.3em;
+  transition: background 0.2s;
+}
+
+.contenedor .ficha .estudiante-card .info .buttons .primary-btn:hover {
+  background-color: #630e10;
+}
+
+.contenedor .ficha .estudiante-card .info .buttons .secondary-btn {
+  border: none;
+  background-color: #383535;
+  padding: 0.6em 1.5em;
+  border-radius: 5px;
+  margin-right: 0.3em;
+  transition: background 0.2s;
+}
+
+.contenedor .ficha .estudiante-card .info .buttons .secondary-btn:hover {
+  background-color: #312e2e;
+}
+
+.contenedor .ficha .apoderados-card {
+  background-color: #171718ee;
+  margin: 1em;
+  border-radius: 12px;
+  padding-bottom: 1em;
+}
+
+.contenedor .ficha .apoderados-card .apoderado-ptitle {
+  font-weight: 700;
+  padding-top: 0.4em;
+  padding-left: 0.8em;
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.contenedor .ficha .apoderados-card .apoderado-pstitle {
+  font-size: 0.9rem;
+  padding: 0;
+  margin: 0;
+  padding-left: 1.3em;
+  color: rgba(245, 239, 239, 0.493);
+}
+
+.contenedor .ficha .apoderado-pdato {
+  padding: 0;
+  margin: 0;
+  padding-left: 1em;
+  font-size: 1.2em;
+  color: white;
+}
+
+.contenedor .ficha .buttons-bottom .primary-btn {
+  border: none;
+  background-color: #7f1416;
+  padding: 0.6em 1.5em;
+  border-radius: 5px;
+  margin-right: 0.3em;
+  transition: background 0.2s;
+  margin-left: 1em;
+  width: 32.3em;
+}
+
+.hide {
+  display: none !important;
+}
