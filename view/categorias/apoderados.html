@@ -20,15 +20,15 @@
   <br>
   <div class="contenedor">
     <div class="contenedor-tabla">
-      <h1>Inspectores</h1>
+      <h1>Apoderados</h1>
       <table id="myTable" class="">
         <thead>
           <tr>
             <th scope="col">id</th>
-            <th scope="col">Nombres </th>
-            <th scope="col">Apellido Paterno </th>
-            <th scope="col">Apellido Materno </th>
-            <th scope="col">opciones </th>
+            <th scope="col">nombres</th>
+            <th scope="col">apellido p</th>
+            <th scope="col">telefono</th>
+            <th scope="col">opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
         </tbody>
       </table>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrear">
-        Crear Inspector
+        Crear Apoderado
       </button>
     </div>
 
@@ -44,17 +44,20 @@
       <div class="estudiante-card">
         <img id="avatar" src="../images/avatar.png" alt="">
         <div class="info">
-          <p class="titulo" id="nombre-inspector">Damián Alberto Panes Lobos</p>
-          <p class="descripcion"><span id="rut-inspector">21.932.498-7</span> | <span
-              id="contacto-inspector">+56940806215</span>
+          <p class="titulo" id="nombre-apoderado">Damián Alberto Panes Lobos</p>
+          <p class="descripcion"><span id="rut-apoderado">21.932.498-7</span> | <span
+              id="contacto-apoderado">+56940806215</span>
           </p>
           <div class="buttons">
+            <button class="primary-btn">Ver Atrasos</button>
             <button class="secondary-btn" onclick="btnEditarModal()">Editar</button>
           </div>
         </div>
+
+
       </div>
       <div class="buttons-bottom">
-        <button class="primary-btn" onclick="btnBorrar()">Eliminar Inspector</button>
+        <button class="primary-btn" onclick="btnBorrar()">Eliminar Apoderado</button>
       </div>
     </div>
   </div>
@@ -64,11 +67,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Estudiante</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Apoderado</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Para crear un <b>Estudiante</b> rellena los siguientes campos que tendras a continuación:</p>
+          <p>Para crear un <b>Apoderado</b> rellena los siguientes campos que tendras a continuación:</p>
           <form action="crear">
             <label for="nombres">Nombres (Ej: Jose Juan): </label>
             <input class="form-control" type="text" name="nombres" id="nombres">
@@ -85,10 +88,7 @@
             <label for="telefono">Telefono (Ej: 912345678): </label>
             <input class="form-control" type="number" name="telefono" id="telefono">
 
-            <label for="direccion">Direccion (Ej: Jorge Andreda 300): </label>
-            <input class="form-control" type="text" name="direccion" id="direccion">
-
-            <button type="button" class="btn btn-primary" id="crearEstudianteBtn">Crear Inspector</button>
+            <button type="button" class="btn btn-primary" id="crearEstudianteBtn">Crear Apoderado</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -103,7 +103,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Inspector:</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Estudiante:</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -123,9 +123,6 @@
 
               <label for="telefono">Telefono (Ej: 912345678): </label>
               <input class="form-control" type="number" name="telefono" id="ed_telefono">
-
-              <label for="direccion">Direccion (Ej: Jorge Andreda 300): </label>
-              <input class="form-control" type="text" name="direccion" id="ed_direccion">
             </div>
           </form>
         </div>
@@ -137,7 +134,7 @@
     </div>
   </div>
 
-  <script src="../js/inspectores.js"></script>
+  <script src="../js/apoderados.js"></script>
 
 </body>
 

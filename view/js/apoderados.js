@@ -1,17 +1,17 @@
 function updateTable() {
   $.ajax({
-    url: "http://localhost:8000/api/inspectores",
+    url: "http://localhost:8000/api/apoderados",
     type: "GET",
     contentType: "application/json ; charset=utf8",
     dataType: "json",
     success: function (response) {
       var tabla = $("#myTable > tbody:last-child");
       tabla.empty();
-      response.forEach((estudiantes) => {
-        var id = estudiantes.id;
-        var nombres = estudiantes.nombres;
-        var apellido_p = estudiantes.apellido_p;
-        var apellido_m = estudiantes.apellido_m;
+      response.forEach((apoderados) => {
+        var id = apoderados.idapoderado;
+        var nombres = apoderados.nombres;
+        var apellido_p = apoderados.apellido_p;
+        var telefonos = apoderados.telefono;
         var fila =
           '<tr class="fila">' +
           '<td class="id">' +
@@ -24,7 +24,7 @@ function updateTable() {
           apellido_p +
           "</td>" +
           "<td>" +
-          apellido_m +
+          telefonos +
           "</td>" +
           '<td><button class="btn btn-success btn-ver" onclick="btnVer()"><i class="fas fa-eye"></i> Ver más</button></td>' +
           "<tr>";
@@ -42,7 +42,6 @@ $("#crearEstudianteBtn").click(async () => {
   var apellido_m = $("#apellido_m").val();
   var rut = $("#rutcrear").val();
   var telefono = $("#telefono").val();
-  var direccion = $("#direccion").val();
 
   var datos = {
     nombres: nombres,
@@ -50,10 +49,9 @@ $("#crearEstudianteBtn").click(async () => {
     apellido_m: apellido_m,
     rut: rut,
     telefono: telefono,
-    direccion: direccion,
   };
   var response = await $.ajax({
-    url: "http://localhost:8000/api/inspector/",
+    url: "http://localhost:8000/api/apoderado/",
     type: "POST",
     contentType: "application/json; charset=utf8",
     data: JSON.stringify(datos),
@@ -74,24 +72,24 @@ function btnVer() {
   var id = idElement.textContent;
 
   $.ajax({
-    url: `http://localhost:8000/api/inspector/${id}`,
+    url: `http://localhost:8000/api/apoderado/${id}`,
     type: "GET",
     contentType: "application/json ; charset=utf8",
     dataType: "json",
     success: (response) => {
-      localStorage.setItem("idinspector", response.idinspector);
+      localStorage.setItem("idapoderado", response.idapoderado);
 
       $(".ficha").removeClass("hide");
       function updateFicha() {
-        $("#nombre-inspector").html(
+        $("#nombre-apoderado").html(
           response.nombres +
             " " +
             response.apellido_p +
             " " +
             response.apellido_m
         );
-        $("#rut-inspector").html(response.rut);
-        $("#contacto-inspector").html(response.telefono);
+        $("#rut-apoderado").html(response.rut);
+        $("#contacto-apoderado").html(response.telefono);
       }
       updateFicha();
     },
@@ -99,11 +97,11 @@ function btnVer() {
 }
 
 function btnEditarModal() {
-  var id = localStorage.getItem("idinspector");
+  var id = localStorage.getItem("idapoderado");
   $("#modalEditar").modal("show");
   function datosModal() {
     $.ajax({
-      url: `http://localhost:8000/api/inspector/${id}`,
+      url: `http://localhost:8000/api/apoderado/${id}`,
       type: "GET",
       contentType: "application/json ; charset=utf8",
       dataType: "json",
@@ -113,7 +111,6 @@ function btnEditarModal() {
         $("#ed_apellido_m").val(response.apellido_m);
         $("#ed_rutcrear").val(response.rut);
         $("#ed_telefono").val(response.telefono);
-        $("#ed_direccion").val(response.direccion);
       },
     });
   }
@@ -126,7 +123,6 @@ function btnEditarModal() {
     var apellido_m = $("#ed_apellido_m").val();
     var rut = $("#ed_rutcrear").val();
     var telefono = $("#ed_telefono").val();
-    var direccion = $("#ed_direccion").val();
 
     var datos = {
       nombres: nombres,
@@ -134,11 +130,10 @@ function btnEditarModal() {
       apellido_m: apellido_m,
       rut: rut,
       telefono: telefono,
-      direccion: direccion,
       id: id,
     };
     var response = await $.ajax({
-      url: `http://localhost:8000/api/inspector/${id}`,
+      url: `http://localhost:8000/api/apoderado/${id}`,
       type: "PUT",
       contentType: "application/json; charset=utf8",
       data: JSON.stringify(datos),
@@ -150,14 +145,14 @@ function btnEditarModal() {
   });
 
   function btnBorrar() {
-    var id = localStorage.getItem("idinspector");
+    var id = localStorage.getItem("idapoderado");
 
     var datos = {
       id: id,
     };
 
     $.ajax({
-      url: `http://127.0.0.1:8000/api/inspector/${id}`,
+      url: `http://127.0.0.1:8000/api/apoderado/${id}`,
       type: "DELETE",
       data: JSON.stringify(datos),
       contentType: "application/json ; charset=utf8",

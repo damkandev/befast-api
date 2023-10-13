@@ -1,56 +1,63 @@
-iframe{
+iframe {
   width: 100vw;
   height: 100vh;
 }
 
-.container{
+.container {
   height: 100vh !important;
 }
 
-button .btn{
-  background-color:  #7f1416 !important;
-  border:0px;
+button .btn {
+  background-color: #7f1416 !important;
+  border: 0px;
 }
 
-.btn-primary{
-  background-color:  #7f1416 !important;
-  border:0px;
+.btn-primary {
+  background-color: #7f1416 !important;
+  border: 0px;
 }
 
-.customnavbar{
+.customnavbar {
   position: fixed;
   width: 4.3125rem;
-  height: 23.5rem;
   background-color: #1113157e;
   border-radius: 12px;
   margin-left: 1em;
-  margin-top: 19vh;
+  margin-top: 13vh;
+  padding-bottom: 1em;
 }
 
-.customnavbar .logo{
+.customnavbar .logo {
   height: 2em;
   margin-left: 1.3em;
   margin-top: 1.3em;
 }
 
-.customnavbar .buttons ul{
+.customnavbar .buttons ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   margin-top: 2em;
 }
 
-.customnavbar .buttons li a{
+.customnavbar .buttons li a {
   display: block;
-  margin-left: .6em;
+  margin-left: 1em;
   margin-top: 1em;
   background-color: #2527297e;
-  width: 3.2em;
+  width: 2.2em;
   padding: 5px;
-  border-radius: 12px;
-  transition: background .3s;
+  border-radius: 5px;
+  transition: background 0.3s;
+  transition: opacity 0.5s;
+  opacity: 0.3;
 }
 
-.customnavbar .buttons li a:hover{
+.customnavbar .buttons li a img {
+  height: 1.5em;
+}
+
+.customnavbar .buttons li a:hover {
   background-color: #7f1416;
+  opacity: 1;
 }

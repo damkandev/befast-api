@@ -1,9 +1,9 @@
 from connection.connection import Conecction
 
 
-class inspectores:
-    def buscarInspectores():
-        query = "SELECT idinspector, nombres, apellido_p , apellido_m, rut, telefono, direccion FROM inspector"
+class apoderadosSUp:
+    def buscarApoderadosSup():
+        query = "SELECT idapoderadosup, nombres, apellido_p, apellido_m, telefono, rut FROM apoderadosup"
         tipoConsulta = 2
         conexionBD = Conecction()
         conexionBD.conectar()
@@ -11,8 +11,8 @@ class inspectores:
         conexionBD.desconectar()
         return resultado
 
-    def buscarInspector(id):
-        query = "SELECT idinspector, nombres, apellido_p, apellido_m, rut, telefono, direccion FROM inspector WHERE idinspector = %s"
+    def buscarApoderadoSup(id):
+        query = "SELECT idapoderadosup, nombres, apellido_p, apellido_m, telefono, rut FROM apoderadosup WHERE idapoderadosup = %s"
         parametros = (id,)
         tipoConsulta = 2
         conexionBD = Conecction()
@@ -21,10 +21,22 @@ class inspectores:
         conexionBD.desconectar()
         return resultado
 
-    def crearInspector(nombres, apellido_p, apellido_m, rut, telefono, direccion):
-        query = "INSERT INTO inspector (nombres,apellido_p,apellido_m,rut,telefono,direccion) VALUES (%s,%s,%s,%s,%s,%s);"
+    def crearApoderadoSup(
+        nombres,
+        apellido_p,
+        apellido_m,
+        telefono,
+        rut,
+    ):
+        query = "INSERT INTO apoderadosup (nombres, apellido_p, apellido_m, telefono, rut) VALUES (%s,%s,%s,%s,%s);"
         tipoConsulta = 1
-        parametros = nombres, apellido_p, apellido_m, rut, telefono, direccion
+        parametros = (
+            nombres,
+            apellido_p,
+            apellido_m,
+            telefono,
+            rut,
+        )
         conexionBD = Conecction()
         conexionBD.conectar()
         try:
@@ -34,19 +46,17 @@ class inspectores:
             print("Ha ocurrido un problema en la inserción", error)
         conexionBD.desconectar()
 
-    def editarInspector(nombres, apellido_p, apellido_m, rut, telefono, direccion, id):
-        print(nombres, apellido_p, apellido_m, rut, telefono, direccion, id)
-        query = "UPDATE inspector SET nombres=%s,apellido_p=%s,apellido_m=%s,rut=%s,telefono=%s,direccion=%s WHERE idinspector = %s;"
+    def editarApoderadoSup(
+        nombres,
+        apellido_p,
+        apellido_m,
+        telefono,
+        rut,
+        idapoderado,
+    ):
+        query = "UPDATE befast.apoderadosup SET nombres=%s, apellido_p=%s, apellido_m=%s, telefono=%s, rut=%s WHERE idapoderadosup=%s;"
         tipoConsulta = 1
-        parametros = (
-            nombres,
-            apellido_p,
-            apellido_m,
-            rut,
-            telefono,
-            direccion,
-            id,
-        )
+        parametros = (nombres, apellido_p, apellido_m, telefono, rut, idapoderado)
         conexionBD = Conecction()
         conexionBD.conectar()
         try:
@@ -56,8 +66,8 @@ class inspectores:
             print("Ha ocurrido un problema en la edición", error)
         conexionBD.desconectar()
 
-    def eliminarInspector(id):
-        query = "DELETE FROM inspector WHERE idinspector = %s;"
+    def eliminarApoderadoSup(id):
+        query = "DELETE FROM apoderadosup WHERE idapoderadosup = %s;"
         tipoConsulta = 1
         parametros = (id,)
         conexionBD = Conecction()

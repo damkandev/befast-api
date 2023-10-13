@@ -15,13 +15,40 @@
   border-radius: 12px !important;
 }
 
+.contenedor-tabla table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.contenedor-tabla table thead th {
+  background-color: #1d1d1d;
+  height: 3em;
+}
+
+.contenedor-tabla table thead th:first-child {
+  background-color: #1d1d1d;
+  height: 3em;
+  border-radius: 0.75rem 0rem 0rem 0.75rem;
+  padding-left: 1em !important;
+  padding-right: 1em;
+}
+
+.contenedor-tabla table thead th:last-child {
+  background-color: #1d1d1d;
+  height: 3em;
+  border-radius: 0rem 0.75rem 0.75rem 0rem;
+  padding-left: 1em !important;
+  padding-right: 1em;
+}
+
 .contenedor .ficha {
   background-color: #1717187e;
   width: 40vw;
-  height: 120vh;
   border-radius: 12px;
-  margin-right: 12vw;
-  margin-bottom: 2em;
+  margin-right: 8vw;
+  margin-bottom: 3em;
+  padding-bottom: 2em;
   display: flow-root;
 }
 
@@ -36,6 +63,8 @@
   width: 8em;
   height: 8em;
   margin: 0.8em;
+  border-radius: 5px;
+  object-fit: cover;
 }
 
 .contenedor .ficha .estudiante-card .info {
@@ -123,4 +152,8 @@
 
 .hide {
   display: none !important;
+}
+
+#buttoncrearcurso {
+  margin-bottom: 2em;
 }

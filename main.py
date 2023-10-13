@@ -3,9 +3,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from model.usuarios import Usuarios
 from model.estudiantes import estudiantes
 from model.inspectores import inspectores
+from model.cursos import cursos
+from model.atrasos import atrasos
+from model.apoderados import apoderados
+from model.apoderadosup import apoderadosSUp
+from handler.apoderadosup import handleApoderadosSup
+from handler.apoderados import handleApoderados
 from handler.usuarios import handleUsers
 from handler.estudiantes import handleEstudiantes
 from handler.inspectores import handleInspectores
+from handler.cursos import handleCursos
+from handler.atrasos import handleAtrasos
 
 
 app = FastAPI()
@@ -65,15 +73,28 @@ def buscarEYA(id):
 async def crearEstudiante(request: Request):
     datos = await request.json()
     nombres = str(datos["nombres"])
+    idcurso = int(datos["idcurso"])
     apellido_p = str(datos["apellido_p"])
     apellido_m = str(datos["apellido_m"])
     rut = int(datos["rut"])
     telefono = int(datos["telefono"])
     direccion = str(datos["direccion"])
+    idapoderado = int(datos["idapoderado"])
+    idapoderadosup = int(datos["idapoderadosup"])
+    avatar = str(datos["avatar"])
     print(datos)
     print(
         estudiantes.crearEstudiante(
-            nombres, apellido_p, apellido_m, rut, telefono, direccion
+            nombres,
+            idcurso,
+            apellido_p,
+            apellido_m,
+            rut,
+            telefono,
+            direccion,
+            idapoderado,
+            idapoderadosup,
+            avatar,
         )
     )
     return datos
@@ -84,14 +105,28 @@ async def editarEstudiante(request: Request):
     datos = await request.json()
     _id = int(datos["id"])
     nombres = str(datos["nombres"])
+    idcurso = int(datos["idcurso"])
     apellido_p = str(datos["apellido_p"])
     apellido_m = str(datos["apellido_m"])
     rut = int(datos["rut"])
     telefono = int(datos["telefono"])
     direccion = str(datos["direccion"])
+    idapoderado = str(datos["idapoderado"])
+    idapoderadosup = str(datos["idapoderadosup"])
+    avatar = str(datos["avatar"])
     print(
         estudiantes.editarEstudiante(
-            nombres, apellido_p, apellido_m, rut, telefono, direccion, _id
+            nombres,
+            idcurso,
+            apellido_p,
+            apellido_m,
+            rut,
+            telefono,
+            direccion,
+            idapoderado,
+            idapoderadosup,
+            avatar,
+            _id,
         )
     )
     return datos
@@ -157,3 +192,194 @@ async def eliminarEstudiante(request: Request):
     datos = await request.json()
     _id = int(datos["id"])
     print(inspectores.eliminarInspector(_id))
+
+
+# Apoderados
+@app.get("/api/apoderados")
+def buscarApoderados():
+    apoderados = handleApoderados.buscarApoderados()
+    return apoderados
+
+
+@app.get("/api/apoderado/{id}")
+def buscarApoderado(id):
+    apoderadoBuscado = handleApoderados.buscarApoderado(id)
+    return apoderadoBuscado
+
+
+@app.post("/api/apoderado")
+async def crearApoderado(request: Request):
+    datos = await request.json()
+    nombres = str(datos["nombres"])
+    apellido_p = str(datos["apellido_p"])
+    apellido_m = str(datos["apellido_m"])
+    telefono = int(datos["telefono"])
+    rut = int(datos["rut"])
+    print(datos)
+    print(
+        apoderados.crearApoderado(
+            nombres,
+            apellido_p,
+            apellido_m,
+            telefono,
+            rut,
+        )
+    )
+    return datos
+
+
+@app.put("/api/apoderado/{id}")
+async def editarApoderado(request: Request):
+    datos = await request.json()
+    _id = int(datos["id"])
+    nombres = str(datos["nombres"])
+    apellido_p = str(datos["apellido_p"])
+    apellido_m = str(datos["apellido_m"])
+    telefono = str(datos["telefono"])
+    rut = int(datos["rut"])
+    print(
+        apoderados.editarApoderado(
+            nombres,
+            apellido_p,
+            apellido_m,
+            rut,
+            telefono,
+            _id,
+        )
+    )
+    return datos
+
+
+@app.delete("/api/apoderado/{id}")
+async def eliminarApoderado(request: Request):
+    datos = await request.json()
+    _id = int(datos["id"])
+    print(apoderados.eliminarApoderado(_id))
+
+
+# Apoderados Suplentes
+@app.get("/api/apoderadossup")
+def buscarApoderadosSup():
+    apoderadosSup = handleApoderadosSup.buscarApoderadosSup()
+    return apoderadosSup
+
+
+@app.get("/api/apoderadosup/{id}")
+def buscarApoderadoSup(id):
+    apoderadoBuscadoSup = handleApoderadosSup.buscarApoderadoSup(id)
+    return apoderadoBuscadoSup
+
+
+@app.post("/api/apoderadosup")
+async def crearApoderadoSup(request: Request):
+    datos = await request.json()
+    nombres = str(datos["nombres"])
+    apellido_p = str(datos["apellido_p"])
+    apellido_m = str(datos["apellido_m"])
+    telefono = int(datos["telefono"])
+    rut = int(datos["rut"])
+    print(datos)
+    print(
+        apoderadosSUp.crearApoderadoSup(
+            nombres,
+            apellido_p,
+            apellido_m,
+            telefono,
+            rut,
+        )
+    )
+    return datos
+
+
+@app.put("/api/apoderadosup/{id}")
+async def editarApoderado(request: Request):
+    datos = await request.json()
+    _id = int(datos["id"])
+    nombres = str(datos["nombres"])
+    apellido_p = str(datos["apellido_p"])
+    apellido_m = str(datos["apellido_m"])
+    telefono = str(datos["telefono"])
+    rut = int(datos["rut"])
+    print(
+        apoderadosSUp.editarApoderadoSup(
+            nombres,
+            apellido_p,
+            apellido_m,
+            rut,
+            telefono,
+            _id,
+        )
+    )
+    return datos
+
+
+@app.delete("/api/apoderadosup/{id}")
+async def eliminarApoderado(request: Request):
+    datos = await request.json()
+    _id = int(datos["id"])
+    print(apoderadosSUp.eliminarApoderadoSup(_id))
+
+
+# busqueda por rut
+@app.get("/api/apoderadorut/{rut}")
+def buscarApoderadoRut(rut):
+    apoderado = handleEstudiantes.buscarApoderadoPorRut(rut)
+    return apoderado
+
+
+@app.get("/api/apoderadosuprut/{rut}")
+def buscarApoderadoSupRut(rut):
+    apoderadosup = handleEstudiantes.buscarApoderadoSupPorRut(rut)
+    return apoderadosup
+
+
+# Cursos
+@app.get("/api/cursos")
+def buscarCursos():
+    cursos = handleCursos.buscarCursos()
+    return cursos
+
+
+@app.get("/api/curso/{id}")
+def buscarCurso(id):
+    cursoBuscado = handleCursos.buscarCurso(id)
+    return cursoBuscado
+
+
+@app.put("/api/curso/{id}")
+async def editarCurso(request: Request):
+    datos = await request.json()
+    _id = int(datos["idcurso"])
+    nivel = int(datos["nivel"])
+    letra = str(datos["letra"])
+    print(cursos.editarCurso(nivel, letra, _id))
+    return datos
+
+
+@app.post("/api/cursos")
+async def crearCurso(request: Request):
+    datos = await request.json()
+    nivel = int(datos["nivel"])
+    letra = str(datos["letra"])
+    print(cursos.crearCurso(nivel, letra))
+    return datos
+
+
+@app.delete("/api/curso/{id}")
+async def eliminarCurso(request: Request):
+    datos = await request.json()
+    _id = int(datos["id"])
+    print(cursos.eliminarCurso(_id))
+
+
+# Atrasos
+@app.get("/api/atrasos")
+def buscarAtrasos():
+    atrasos = handleAtrasos.buscarAtrasos()
+    return atrasos
+
+
+@app.get("/api/atraso/{id}")
+def buscarAtraso(id):
+    atrasoBuscado = handleAtrasos.buscarAtraso(id)
+    return atrasoBuscado

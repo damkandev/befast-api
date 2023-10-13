@@ -31,10 +31,52 @@ class estudiantes:
         conexionBD.desconectar()
         return resultado
 
-    def crearEstudiante(nombres, apellido_p, apellido_m, rut, telefono, direccion):
-        query = "INSERT INTO estudiante (nombres,apellido_p,apellido_m,rut,telefono,direccion) VALUES (%s,%s,%s,%s,%s,%s);"
+    def buscarApoderadoPorRut(rut):
+        query = "select idapoderado from apoderado where rut = %s"
+        parametros = (rut,)
+        tipoConsulta = 2
+        conexionBD = Conecction()
+        conexionBD.conectar()
+        resultado = conexionBD.consultaDB(query, tipoConsulta, parametros)
+        conexionBD.desconectar()
+        return resultado
+
+    def buscarApoderadoSupPorRut(rut):
+        query = "select idapoderadosup from apoderadosup where rut = %s"
+        parametros = (rut,)
+        tipoConsulta = 2
+        conexionBD = Conecction()
+        conexionBD.conectar()
+        resultado = conexionBD.consultaDB(query, tipoConsulta, parametros)
+        conexionBD.desconectar()
+        return resultado
+
+    def crearEstudiante(
+        nombres,
+        idcurso,
+        apellido_p,
+        apellido_m,
+        rut,
+        telefono,
+        direccion,
+        idapoderado,
+        idapoderadosup,
+        avatar,
+    ):
+        query = "INSERT INTO estudiante (nombres, idcurso, apellido_p,apellido_m,rut,telefono,direccion, idapoderado, idapoderadosup, avatar) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
         tipoConsulta = 1
-        parametros = nombres, apellido_p, apellido_m, rut, telefono, direccion
+        parametros = (
+            nombres,
+            idcurso,
+            apellido_p,
+            apellido_m,
+            rut,
+            telefono,
+            direccion,
+            idapoderado,
+            idapoderadosup,
+            avatar,
+        )
         conexionBD = Conecction()
         conexionBD.conectar()
         try:
@@ -44,18 +86,33 @@ class estudiantes:
             print("Ha ocurrido un problema en la inserción", error)
         conexionBD.desconectar()
 
-    def editarEstudiante(nombres, apellido_p, apellido_m, rut, telefono, direccion, id):
-        print(nombres, apellido_p, apellido_m, rut, telefono, direccion, id)
-        query = "UPDATE estudiante SET nombres=%s,apellido_p=%s,apellido_m=%s,rut=%s,telefono=%s,direccion=%s WHERE idestudiante = %s;"
+    def editarEstudiante(
+        nombres,
+        idcurso,
+        apellido_p,
+        apellido_m,
+        rut,
+        telefono,
+        direccion,
+        idapoderado,
+        idapoderadosup,
+        avatar,
+        idestudiante,
+    ):
+        query = "UPDATE befast.estudiante SET idcurso=%s, nombres=%s, apellido_p=%s, apellido_m=%s, rut=%s, telefono=%s, direccion=%s, idapoderado=%s, idapoderadosup=%s, avatar=%s WHERE idestudiante=%s;"
         tipoConsulta = 1
         parametros = (
+            idcurso,
             nombres,
             apellido_p,
             apellido_m,
             rut,
             telefono,
             direccion,
-            id,
+            idapoderado,
+            idapoderadosup,
+            avatar,
+            idestudiante,
         )
         conexionBD = Conecction()
         conexionBD.conectar()

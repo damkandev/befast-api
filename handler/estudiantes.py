@@ -66,3 +66,17 @@ class handleEstudiantes:
                 "apoderadosup_rut": info[20],
             }
         return estudianteYApoderadoBuscado
+
+    def buscarApoderadoPorRut(rut):
+        apoderadoBuscado = {}
+        informacionApoderado = estudiantes.buscarApoderadoPorRut(rut)
+        for info in informacionApoderado:
+            apoderadoBuscado = {"idapoderado": info[0]}
+        return apoderadoBuscado
+
+    def buscarApoderadoSupPorRut(rut):
+        apoderadoSupBuscado = {}
+        informacionApoderadoSup = estudiantes.buscarApoderadoSupPorRut(rut)
+        for info in informacionApoderadoSup:
+            apoderadoSupBuscado = {"idapoderadosup": info[0]}
+        return apoderadoSupBuscado

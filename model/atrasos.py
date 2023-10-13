@@ -1,9 +1,9 @@
 from connection.connection import Conecction
 
 
-class inspectores:
-    def buscarInspectores():
-        query = "SELECT idinspector, nombres, apellido_p , apellido_m, rut, telefono, direccion FROM inspector"
+class atrasos:
+    def buscarAtrasos():
+        query = "SELECT e.idestudiante, e.nombres, e.apellido_p, e.apellido_m, e.avatar, c.nivel, c.letra, e.rut, a.fecha_atraso, a.hora_atraso FROM estudiante e RIGHT JOIN atraso a ON e.idestudiante = a.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso"
         tipoConsulta = 2
         conexionBD = Conecction()
         conexionBD.conectar()
@@ -11,8 +11,8 @@ class inspectores:
         conexionBD.desconectar()
         return resultado
 
-    def buscarInspector(id):
-        query = "SELECT idinspector, nombres, apellido_p, apellido_m, rut, telefono, direccion FROM inspector WHERE idinspector = %s"
+    def buscarAtraso(id):
+        query = "SELECT e.idestudiante, e.nombres, e.apellido_p, e.apellido_m, e.avatar, c.nivel, c.letra, e.rut, a.fecha_atraso, a.hora_atraso FROM estudiante e RIGHT JOIN atraso a ON e.idestudiante = a.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso WHERE e.idestudiante = %s"
         parametros = (id,)
         tipoConsulta = 2
         conexionBD = Conecction()
@@ -21,10 +21,16 @@ class inspectores:
         conexionBD.desconectar()
         return resultado
 
-    def crearInspector(nombres, apellido_p, apellido_m, rut, telefono, direccion):
-        query = "INSERT INTO inspector (nombres,apellido_p,apellido_m,rut,telefono,direccion) VALUES (%s,%s,%s,%s,%s,%s);"
+    def crearAtraso(
+        idcurso,
+        idestudiante,
+        idinspector,
+        fecha_atraso,
+        hora_atraso,
+    ):
+        query = "INSERT INTO atraso (idcurso, idestudiante, idinspector, fecha_atraso, hora_atraso) VALUES (%s,%s,%s,%s,%s);"
         tipoConsulta = 1
-        parametros = nombres, apellido_p, apellido_m, rut, telefono, direccion
+        parametros = (idcurso, idestudiante, idinspector, fecha_atraso, hora_atraso)
         conexionBD = Conecction()
         conexionBD.conectar()
         try:
@@ -34,18 +40,18 @@ class inspectores:
             print("Ha ocurrido un problema en la inserción", error)
         conexionBD.desconectar()
 
-    def editarInspector(nombres, apellido_p, apellido_m, rut, telefono, direccion, id):
-        print(nombres, apellido_p, apellido_m, rut, telefono, direccion, id)
-        query = "UPDATE inspector SET nombres=%s,apellido_p=%s,apellido_m=%s,rut=%s,telefono=%s,direccion=%s WHERE idinspector = %s;"
+    def editarAtraso(
+        idcurso, idestudiante, idinspector, fecha_atraso, hora_atraso, idatraso
+    ):
+        query = "UPDATE atraso SET idcurso = %s, idestudiante=%s, idinspector=%s, fecha_atraso=%s, hora_atraso=%s WHERE idatraso=%s;"
         tipoConsulta = 1
         parametros = (
-            nombres,
-            apellido_p,
-            apellido_m,
-            rut,
-            telefono,
-            direccion,
-            id,
+            idcurso,
+            idestudiante,
+            idinspector,
+            fecha_atraso,
+            hora_atraso,
+            idatraso,
         )
         conexionBD = Conecction()
         conexionBD.conectar()
@@ -56,8 +62,8 @@ class inspectores:
             print("Ha ocurrido un problema en la edición", error)
         conexionBD.desconectar()
 
-    def eliminarInspector(id):
-        query = "DELETE FROM inspector WHERE idinspector = %s;"
+    def eliminarAtraso(id):
+        query = "DELETE FROM atraso WHERE idatraso = %s;"
         tipoConsulta = 1
         parametros = (id,)
         conexionBD = Conecction()

@@ -27,11 +27,12 @@ class handleInspectores:
         informacionInspector = inspectores.buscarInspector(id)
         for info in informacionInspector:
             inspectorBuscado = {
-                "nombres": info[0],
-                "apellido_p": info[1],
-                "apellido_m": info[2],
-                "rut": info[3],
-                "telefono": info[4],
-                "direccion": info[5],
+                "idinspector": info[0],
+                "nombres": info[1],
+                "apellido_p": info[2],
+                "apellido_m": info[3],
+                "rut": info[4],
+                "telefono": info[5],
+                "direccion": info[6],
             }
         return inspectorBuscado

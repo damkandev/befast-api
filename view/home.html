@@ -8,6 +8,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+  <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,25 +19,71 @@
     <img src="./images/logo.svg" alt="" class="logo">
     <div class="buttons">
       <ul>
-        <li><a href="./categorias/estudiantes.html" target="iframe"><img src="./images/alumnos.svg" alt=""
-              class="icon i-alumnos"></a></li>
-        <li><a href="./categorias/inspectores.html" target="iframe"><img src="./images/inspectores.svg" alt=""
-              class="icon i-inspectores"></a></li>
+        <li><a href="./categorias/estudiantes.html" target="iframe" id="btn-alumnos"><img src="./images/alumnos.svg"
+              alt="" class="icon i-alumnos"></a></li>
+        <li><a href="./categorias/inspectores.html" target="iframe" id="btn-inspectores"><img
+              src="./images/inspectores.svg" alt="" class="icon i-inspectores"></a></li>
+        <li><a href="./categorias/cursos.html" target="iframe" id="btn-cursos"><img src="./images/courses.svg" alt=""
+              class="icon i-courses"></a></li>
+        <li><a href="./categorias/atrasos.html" target="iframe" id="btn-atrasos"><img src="./images/atrasos.svg" alt=""
+              class="icon i-atrasos"></a></li>
+        <li><a href="./categorias/usuarios.html" target="iframe" id="btn-usuarios"><img src="./images/usersvip.svg"
+              alt="" class="icon i-atrasos"></a></li>
+        <li><a href="./categorias/apoderados.html" target="iframe" id="btn-apoderados"><img
+              src="./images/apoderados.svg" alt="" class="icon i-atrasos"></a></li>
+        <li><a href="./categorias/apoderadossup.html" target="iframe" id="btn-apoderadosSup"><img
+              src="./images/apoderados.svg" alt="" class="icon i-atrasos"></a></li>
         <li><a href="#" target="iframe" id="btnCerrarSesion"><img src="./images/cerrarSesion.svg" alt=""
               class="icon i-cerrarSesion"></a></li>
-        <li><a href="#" target="iframe"><img src="./images/avatar.png" </a></li>
+        <li><a href="#" target="iframe"><img src="./images/avatar.png"> </a></li>
       </ul>
-
-
-
     </div>
   </nav>
 
   <iframe id="iframe" name="iframe" src="./categorias/general.html" frameborder="0"></iframe>
 
 
-  <script src="./js/checkToken.js">
+  <script src="./js/checkToken.js"></script>
+  <script>
+    tippy('#btn-alumnos', {
+      content: 'Alumnos',
+      animation: 'scale',
+    })
 
+    tippy('#btn-inspectores', {
+      content: 'Inspectores',
+      animation: 'scale',
+    })
+
+    tippy('#btn-cursos', {
+      content: 'Cursos',
+      animation: 'scale',
+    })
+
+    tippy('#btn-atrasos', {
+      content: 'Atrasos',
+      animation: 'scale',
+    })
+
+    tippy('#btn-usuarios', {
+      content: 'Usuarios',
+      animation: 'scale',
+    })
+
+    tippy('#btn-apoderados', {
+      content: 'Apoderados',
+      animation: 'scale',
+    })
+
+    tippy('#btn-apoderadosSup', {
+      content: 'Apoderados Sup',
+      animation: 'scale',
+    })
+
+    tippy('#btnCerrarSesion', {
+      content: 'Cerrar Sesión',
+      animation: 'scale',
+    })
   </script>
 </body>
 

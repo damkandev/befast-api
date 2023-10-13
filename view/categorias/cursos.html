@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./css/estudiantes.css">
+</head>
+
+<body data-bs-theme="dark">
+  <br>
+
+  <div class="contenedor">
+    <div class="container">
+      <div class="row" id="card-container">
+        <button type="button" class="btn btn-primary" id="buttoncrearcurso" data-bs-toggle="modal"
+          data-bs-target="#modalCrear">
+          Crear Curso
+        </button>
+
+
+      </div>
+
+      <div class="row">
+      </div>
+    </div>
+
+    <!-- Modal Crear Estudiante -->
+    <div class="modal fade" id="modalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Curso</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Para crear un <b>Estudiante</b> rellena los siguientes campos que tendras a continuación:</p>
+            <form action="crear">
+              <label for="nombres">Nivel: </label>
+              <input class="form-control" type="text" name="nombres" id="nivel">
+
+              <label for="nombres">Letra: </label>
+              <input class="form-control" type="text" name="nombres" id="letra">
+
+              <button type="button" class="btn btn-primary" id="crearEstudianteBtn">Crear Estudiante</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Editar -->
+    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Estudiante:</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="nombres">Nivel (Ej: 4): </label>
+                <input class="form-control" type="text" name="nombres" id="ed_nivel">
+
+                <label for="apellido_p">Letra (Ej: F): </label>
+                <input class="form-control" type="text" name="apellido_p" id="ed_letra">
+
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="editarBtn" class="btn btn-primary">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/cursos.js"></script>
+    <script>
+      function btnBorrar() {
+        var cardElement = $(event.target).closest(".card");
+        var idcursoElement = cardElement.find("#idcurso");
+        var id = parseInt(idcursoElement.text());
+
+        console.log("lol");
+
+        var datos = {
+          id: id,
+        };
+
+        $.ajax({
+          url: `http://127.0.0.1:8000/api/curso/${id}`,
+          type: "DELETE",
+          data: JSON.stringify(datos),
+          contentType: "application/json ; charset=utf8",
+          dataType: "json",
+          success: (response) => {
+            location.reload();
+          },
+        });
+      }
+    </script>
+
+</body>
+
+
+</html>

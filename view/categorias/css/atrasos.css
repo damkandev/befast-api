@@ -1,0 +1,48 @@
+.card {
+  background-color: transparent;
+  border: none;
+  margin-right: 1em !important;
+}
+
+.atraso {
+  background-color: white;
+  border-radius: 12px;
+  color: black;
+  padding: 1em 1.3em;
+  width: 24em;
+}
+
+.atraso .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.atraso .top .left img {
+  object-fit: cover;
+  border-radius: 4px;
+  height: 7em;
+  width: 7em;
+}
+
+.atraso .top .right {
+  margin-left: 1em;
+}
+
+.atraso .top .right p {
+  margin: 0;
+  padding: 0;
+}
+
+.atraso .top .right .anombre {
+  font-weight: 700;
+  font-size: 1.3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+.atraso .bottom {
+  margin-top: 1.2em;
+  display: flex;
+  justify-content: space-between;
+}

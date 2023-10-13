@@ -1,9 +1,9 @@
 from connection.connection import Conecction
 
 
-class inspectores:
-    def buscarInspectores():
-        query = "SELECT idinspector, nombres, apellido_p , apellido_m, rut, telefono, direccion FROM inspector"
+class cursos:
+    def buscarCursos():
+        query = "SELECT idcurso, nivel, letra FROM curso"
         tipoConsulta = 2
         conexionBD = Conecction()
         conexionBD.conectar()
@@ -11,8 +11,8 @@ class inspectores:
         conexionBD.desconectar()
         return resultado
 
-    def buscarInspector(id):
-        query = "SELECT idinspector, nombres, apellido_p, apellido_m, rut, telefono, direccion FROM inspector WHERE idinspector = %s"
+    def buscarCurso(id):
+        query = "SELECT idcurso, nivel, letra FROM curso WHERE idcurso = %s"
         parametros = (id,)
         tipoConsulta = 2
         conexionBD = Conecction()
@@ -21,10 +21,16 @@ class inspectores:
         conexionBD.desconectar()
         return resultado
 
-    def crearInspector(nombres, apellido_p, apellido_m, rut, telefono, direccion):
-        query = "INSERT INTO inspector (nombres,apellido_p,apellido_m,rut,telefono,direccion) VALUES (%s,%s,%s,%s,%s,%s);"
+    def crearCurso(
+        nivel,
+        letra,
+    ):
+        query = "INSERT INTO curso (nivel, letra) VALUES (%s,%s);"
         tipoConsulta = 1
-        parametros = nombres, apellido_p, apellido_m, rut, telefono, direccion
+        parametros = (
+            nivel,
+            letra,
+        )
         conexionBD = Conecction()
         conexionBD.conectar()
         try:
@@ -34,18 +40,17 @@ class inspectores:
             print("Ha ocurrido un problema en la inserción", error)
         conexionBD.desconectar()
 
-    def editarInspector(nombres, apellido_p, apellido_m, rut, telefono, direccion, id):
-        print(nombres, apellido_p, apellido_m, rut, telefono, direccion, id)
-        query = "UPDATE inspector SET nombres=%s,apellido_p=%s,apellido_m=%s,rut=%s,telefono=%s,direccion=%s WHERE idinspector = %s;"
+    def editarCurso(
+        nivel,
+        letra,
+        idcurso,
+    ):
+        query = "UPDATE curso SET nivel = %s, letra =%s WHERE idcurso=%s;"
         tipoConsulta = 1
         parametros = (
-            nombres,
-            apellido_p,
-            apellido_m,
-            rut,
-            telefono,
-            direccion,
-            id,
+            nivel,
+            letra,
+            idcurso,
         )
         conexionBD = Conecction()
         conexionBD.conectar()
@@ -56,8 +61,8 @@ class inspectores:
             print("Ha ocurrido un problema en la edición", error)
         conexionBD.desconectar()
 
-    def eliminarInspector(id):
-        query = "DELETE FROM inspector WHERE idinspector = %s;"
+    def eliminarCurso(id):
+        query = "DELETE FROM curso WHERE idcurso = %s;"
         tipoConsulta = 1
         parametros = (id,)
         conexionBD = Conecction()

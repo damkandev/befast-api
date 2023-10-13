@@ -21,7 +21,7 @@
   <div class="contenedor">
     <div class="contenedor-tabla">
       <h1>Estudiantes</h1>
-      <table id="myTable" class="table-sm table-striped table-bordered">
+      <table id="myTable" class="">
         <thead>
           <tr>
             <th scope="col">id</th>
@@ -42,7 +42,7 @@
 
     <div class="ficha hide">
       <div class="estudiante-card">
-        <img src="../images/avatar.png" alt="">
+        <img id="avatar" src="../images/avatar.png" alt="">
         <div class="info">
           <p class="titulo" id="nombre-estudiante">Damián Alberto Panes Lobos</p>
           <p class="descripcion"><span id="rut-estudiante">21.932.498-7</span> | <span
@@ -60,18 +60,14 @@
       <div class="apoderados-card">
         <p class="apoderado-ptitle">Apoderado Principal</p>
         <p class="apoderado-pstitle">Nombre Apoderado</p>
-        <p class="apoderado-pdato" id="nombre-apoderado-principal">Ines Estrella Lobos Ruiz</p>
-        <p class="apoderado-pstitle">Dirección Apoderado</p>
-        <p class="apoderado-pdato" id="direccion-apoderado-principal">Luis Araneda 1206, Chillán Viejo</p>
+        <p class="apoderado-pdato" id="nombre-apoderado-principal">Jhon Doe</p>
         <p class="apoderado-pstitle">Número de Telefono</p>
-        <p class="apoderado-pdato" id="telefono-apoderado-principal">+56 9 1234 5678</p>
+        <p class="apoderado-pdato" id="telefono-apoderado-principal">+56910101010</p>
         <p class="apoderado-ptitle">Apoderado Suplente</p>
         <p class="apoderado-pstitle">Nombre Apoderado</p>
-        <p class="apoderado-pdato" id="nombre-apoderado-suplente">Robnaldo Gustavo Panes Castro</p>
-        <p class="apoderado-pstitle">Dirección Apoderado</p>
-        <p class="apoderado-pdato" id="direccion-apoderado-suplente">Luis Araneda 1206, Chillán Viejo</p>
+        <p class="apoderado-pdato" id="nombre-apoderado-suplente">Jhon Doe</p>
         <p class="apoderado-pstitle">Número de Telefono</p>
-        <p class="apoderado-pdato" id="telefono-apoderado-suplente">+56 9 1234 5678</p>
+        <p class="apoderado-pdato" id="telefono-apoderado-suplente">+56910101010</p>
       </div>
       <div class="buttons-bottom">
         <button class="primary-btn" onclick="btnBorrar()">Eliminar Alumno</button>
@@ -93,6 +89,10 @@
             <label for="nombres">Nombres (Ej: Jose Juan): </label>
             <input class="form-control" type="text" name="nombres" id="nombres">
 
+            <label for="nombres">Curso: </label>
+            <select class="form-select" name="cursos" id="idcurso">
+            </select>
+
             <label for="apellido_p">Apellido Paterno: </label>
             <input class="form-control" type="text" name="apellido_p" id="apellido_p">
 
@@ -100,13 +100,22 @@
             <input class="form-control" type="text" name="apellido_m" id="apellido_m">
 
             <label for="rut">R.U.T (Ej: 123456789): </label>
-            <input class="form-control" type="text" name="rut" id="rutcrear">
+            <input class="form-control" type="number" name="rut" id="rutcrear">
 
             <label for="telefono">Telefono (Ej: 912345678): </label>
-            <input class="form-control" type="text" name="telefono" id="telefono">
+            <input class="form-control" type="number" name="telefono" id="telefono">
 
             <label for="direccion">Direccion (Ej: Jorge Andreda 300): </label>
             <input class="form-control" type="text" name="direccion" id="direccion">
+
+            <label for="rutapoderado">RUT Apoderado: </label>
+            <input class="form-control" type="text" name="rutapoderado" id="rutapoderado">
+
+            <label for="rutapoderadosup">RUT Apoderado Suplente: </label>
+            <input class="form-control" type="text" name="rutapoderadosup" id="rutapoderadosup">
+
+            <label for="avatar">Imagen Estudiante (URL): </label>
+            <input class="form-control" type="text" name="avatar" id="avatarestudiante">
 
             <button type="button" class="btn btn-primary" id="crearEstudianteBtn">Crear Estudiante</button>
           </form>
@@ -118,53 +127,71 @@
     </div>
   </div>
 
-  <!-- Modal Ver Estudiante -->
-  <div class="modal fade" id="modalVer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="tituloModal">Modal Title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div id="contenidoModal" class="modal-body">
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Modal Editar -->
   <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Juego:</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Estudiante:</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Nuevos Nombres:</label>
-              <input type="text" class="form-control" id="Enombres">
+              <label for="nombres">Nombres (Ej: Jose Juan): </label>
+              <input class="form-control" type="text" name="nombres" id="ed_nombres">
 
-              <label for="recipient-name" class="col-form-label">Nuevo Apellido Paterno:</label>
-              <input type="text" class="form-control" id="Eapellido_p">
+              <label for="nombres">Curso: </label>
+              <select class="form-select" name="cursos" id="ed_idcurso">
+                <option value="17">1A</option>
+                <option value="18">1B</option>
+                <option value="19">1C</option>
+                <option value="20">1D</option>
+                <option value="24">1E</option>
+                <option value="21">1F</option>
+                <option value="12">2A</option>
+                <option value="13">2B</option>
+                <option value="28">2C</option>
+                <option value="15">2D</option>
+                <option value="23">2E</option>
+                <option value="16">2F</option>
+                <option value="7">3A</option>
+                <option value="8">3B</option>
+                <option value="9">3C</option>
+                <option value="10">3D</option>
+                <option value="22">3E</option>
+                <option value="11">3F</option>
+                <option value="2">4A</option>
+                <option value="3">4B</option>
+                <option value="4">4C</option>
+                <option value="5">4D</option>
+                <option value="6">4E</option>
+                <option value="1">4F</option>
+              </select>
 
-              <label for="recipient-name" class="col-form-label">Nuevo Apellido Materno:</label>
-              <input type="text" class="form-control" id="Eapellido_m">
+              <label for="apellido_p">Apellido Paterno: </label>
+              <input class="form-control" type="text" name="apellido_p" id="ed_apellido_p">
 
-              <label for="recipient-name" class="col-form-label">Nuevo RUT:</label>
-              <input type="text" class="form-control" id="Erut">
+              <label for="apellido_m">Apellido Materno: </label>
+              <input class="form-control" type="text" name="apellido_m" id="ed_apellido_m">
 
-              <label for="recipient-name" class="col-form-label">Nuevo Telefono:</label>
-              <input type="text" class="form-control" id="Etelefono">
+              <label for="rut">R.U.T (Ej: 123456789): </label>
+              <input class="form-control" type="number" name="rut" id="ed_rutcrear">
 
-              <label for="recipient-name" class="col-form-label">Nueva Dirección:</label>
-              <input type="text" class="form-control" id="Edireccion">
+              <label for="telefono">Telefono (Ej: 912345678): </label>
+              <input class="form-control" type="number" name="telefono" id="ed_telefono">
+
+              <label for="direccion">Direccion (Ej: Jorge Andreda 300): </label>
+              <input class="form-control" type="text" name="direccion" id="ed_direccion">
+
+              <label for="rutapoderado">RUT Apoderado: </label>
+              <input class="form-control" type="text" name="rutapoderado" id="ed_rutapoderado">
+
+              <label for="rutapoderadosup">RUT Apoderado Suplente: </label>
+              <input class="form-control" type="text" name="rutapoderadosup" id="ed_rutapoderadosup">
+
+              <label for="avatar">Imagen Estudiante (URL): </label>
+              <input class="form-control" type="text" name="avatar" id="ed_avatarestudiante">
             </div>
           </form>
         </div>
