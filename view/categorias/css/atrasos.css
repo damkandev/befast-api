@@ -1,3 +1,16 @@
+.busqueda input{
+  width: 90%;
+  height: 2.3em;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  padding-left: 1em;
+}
+
+.busqueda button{
+  width: 7em;
+  height: 2.3em;
+  border-radius: 5px;
+}
 .card {
   background-color: transparent;
   border: none;
@@ -45,4 +58,16 @@
   margin-top: 1.2em;
   display: flex;
   justify-content: space-between;
+}
+
+.atraso .bottom .print{
+  height: 2em;
+  width: 2em;
+  border: 0;
+  border-radius: 4px;
+}
+
+.atraso .bottom .print img{
+  height: 1.5em;
+  width: 1.5em;
 }

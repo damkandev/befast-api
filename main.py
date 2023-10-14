@@ -378,8 +378,8 @@ def buscarAtrasos():
     atrasos = handleAtrasos.buscarAtrasos()
     return atrasos
 
+@app.get("/api/atraso/{term}")
+def buscarAtraso(term):
+    atrasos = handleAtrasos.buscarAtraso(term)
+    return atrasos
 
-@app.get("/api/atraso/{id}")
-def buscarAtraso(id):
-    atrasoBuscado = handleAtrasos.buscarAtraso(id)
-    return atrasoBuscado

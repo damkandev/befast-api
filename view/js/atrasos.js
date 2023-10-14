@@ -1,37 +1,128 @@
-function updateTable() {
-  $.ajax({
-    url: "http://localhost:8000/api/atrasos",
-    type: "GET",
-    contentType: "application/json ; charset=utf8",
-    dataType: "json",
-    success: function (response) {
-      $.each(response, function (index, item) {
-        var card = `<div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body atraso">
-            <div class="top">
-              <div class="left">
-                <img src="${item.avatar}" alt="">
-              </div>
-              <div class="right">
-                <p class="atitle">Nombre Alumno</p>
-                <p class="anombre">${item.nombres} ${item.apellido_p} ${item.apellido_m}</p>
-                <p class="info">Curso: ${item.nivel}${item.letra} | RUT: ${item.rut}</p>
-              </div>
-            </div>
-            <div class="bottom">
-              <p class="infob"><b>Fecha:</b> ${item.fecha_atraso} <b>Hora Entrada:</b> ${item.hora_atraso} </p>
-            </div>
-          </div>
-        </div>
-      </div>`;
-        $("#card-container").append(card);
-      });
-    },
-  });
+function secondsToString(seconds) {
+  var hour = Math.floor(seconds / 3600);
+  hour = (hour < 10)? '0' + hour : hour;
+  var minute = Math.floor((seconds / 60) % 60);
+  minute = (minute < 10)? '0' + minute : minute;
+  var second = seconds % 60;
+  second = (second < 10)? '0' + second : second;
+  return hour + ':' + minute;
 }
 
-updateTable();
+
+function updateTable(search, termino) {
+  if(search === false){
+    $.ajax({
+      url: "http://localhost:8000/api/atrasos",
+      type: "GET",
+      contentType: "application/json ; charset=utf8",
+      dataType: "json",
+      success: function (response) {
+        $.each(response, function (index, item) {
+          var card = `<div class="col-md-4">
+          <div class="card mb-4" tilt>
+            <div  class="card-body atraso">
+              <div class="top">
+                <div class="left">
+                  <img src="${item.avatar}" alt="">
+                </div>
+                <div class="right"> 
+                  <p class="atitle">Nombre Alumno</p>
+                  <p class="anombre">${item.nombres} ${item.apellido_p} ${item.apellido_m}</p>
+                  <p class="info">Curso: ${item.nivel + item.letra} | RUT: ${item.rut}</p>
+                </div>
+              </div>
+              <div class="bottom">
+                <p class="infob"><b>Fecha:</b> ${item.fecha} <b>Hora Entrada:</b> ${secondsToString(item.hora)} </p>
+                <div class="buttons">
+                  <button class="print"><img src="../images/impresora.svg" alt=""></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+          $("#card-container-cards").append(card);
+          VanillaTilt.init(document.querySelector(".atraso"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare":0.8
+          });
+    
+          VanillaTilt.init(document.querySelectorAll(".atraso"));
+        });
+      },
+    });
+  } else if(search === true) {
+    $.ajax({
+      url: `http://localhost:8000/api/atraso/${termino}`,
+      type: "GET",
+      contentType: "application/json ; charset=utf8",
+      dataType: "json",
+      success: function (response) {
+        $.each(response, function (index, item) {
+          var card = `<div class="col-md-4">
+          <div class="card mb-4" tilt>
+            <div  class="card-body atraso">
+              <div class="top">
+                <div class="left">
+                  <img src="${item.avatar}" alt="">
+                </div>
+                <div class="right"> 
+                  <p class="atitle">Nombre Alumno</p>
+                  <p class="anombre">${item.nombres} ${item.apellido_p} ${item.apellido_m}</p>
+                  <p class="info">Curso: ${item.nivel + item.letra} | RUT: ${item.rut}</p>
+                </div>
+              </div>
+              <div class="bottom">
+                <p class="infob"><b>Fecha:</b> ${item.fecha} <b>Hora Entrada:</b> ${secondsToString(item.hora)} </p>
+                <div class="buttons">
+                  <button class="print"><img src="../images/impresora.svg" alt=""></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+          $("#card-container-cards").append(card);
+          VanillaTilt.init(document.querySelector(".atraso"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare":0.8
+          });
+    
+          VanillaTilt.init(document.querySelectorAll(".atraso"));
+        });
+      },
+    });
+    
+  }
+  
+}
+
+updateTable(false, "")
+
+document.addEventListener("DOMContentLoaded", function(){
+  function captarInput(){
+    input = document.getElementById("searachinpt")
+    input.addEventListener("keyup", function(event){
+      var valor = input.value;
+      if(!valor){
+        document.getElementById("card-container-cards").innerHTML = "";
+        updateTable(false, "damian");
+      } else {
+        document.getElementById("card-container-cards").innerHTML = "";
+        updateTable(true, valor);
+
+      }
+    })
+    
+  }
+
+  captarInput()
+})
+
+
+
 
 $("#crearEstudianteBtn").click(async () => {
   var nivel = $("#nivel").val();

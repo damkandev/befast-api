@@ -62,6 +62,28 @@ $(document).ready(() => {
   });
 });
 
+$(document).ready(() => {
+  $.ajax({
+    url: "http://127.0.0.1:8000/api/cursos/",
+    type: "GET",
+    contentType: "application/json ; charset=utf8",
+    dataType: "json",
+    success: function (response) {
+      var opt = $("#idcursoedit");
+
+      response.forEach((cursos) => {
+        var id = cursos.idcurso;
+        var nivel = cursos.nivel;
+        var letra = cursos.letra;
+        var opcion =
+          '<option value="' + id + '">' + nivel + letra + "</option>";
+        console.log(opcion);
+        opt.append(opcion);
+      });
+    },
+  });
+});
+
 $("#crearEstudianteBtn").click(async () => {
   var nombres = $("#nombres").val();
   var idcurso = $("#idcurso").val();

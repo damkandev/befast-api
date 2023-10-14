@@ -3,7 +3,7 @@ from connection.connection import Conecction
 
 class atrasos:
     def buscarAtrasos():
-        query = "SELECT e.idestudiante, e.nombres, e.apellido_p, e.apellido_m, e.avatar, c.nivel, c.letra, e.rut, a.fecha_atraso, a.hora_atraso FROM estudiante e RIGHT JOIN atraso a ON e.idestudiante = a.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso"
+        query = "SELECT e.nombres, e.apellido_p, e.apellido_m, c.nivel, c.letra, e.rut, e.avatar, a.fecha, a.hora, a.idatraso, a.idestudiante FROM atrasos a LEFT JOIN estudiante e ON a.idestudiante = e.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso"
         tipoConsulta = 2
         conexionBD = Conecction()
         conexionBD.conectar()
@@ -11,9 +11,9 @@ class atrasos:
         conexionBD.desconectar()
         return resultado
 
-    def buscarAtraso(id):
-        query = "SELECT e.idestudiante, e.nombres, e.apellido_p, e.apellido_m, e.avatar, c.nivel, c.letra, e.rut, a.fecha_atraso, a.hora_atraso FROM estudiante e RIGHT JOIN atraso a ON e.idestudiante = a.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso WHERE e.idestudiante = %s"
-        parametros = (id,)
+    def buscarAtraso(termino):
+        query = f"SELECT e.nombres, e.apellido_p, e.apellido_m, c.nivel, c.letra, e.rut, e.avatar, a.fecha, a.hora, a.idatraso, a.idestudiante FROM atrasos a LEFT JOIN estudiante e ON a.idestudiante = e.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso WHERE e.nombres LIKE '%{termino}%' OR e.apellido_p LIKE '%{termino}%' OR e.apellido_m LIKE '%{termino}%' OR e.rut LIKE '%{termino}%';"
+        parametros = {(termino, termino, termino, termino,)}
         tipoConsulta = 2
         conexionBD = Conecction()
         conexionBD.conectar()
