@@ -42,7 +42,7 @@ class Usuarios:
     def registrarUsuario(nombre, correo, contrasena):
         contrasenaEncriptada = encriptar(contrasena, cargar_clave())
         query = "INSERT INTO usuarios (nombre, correo, contraseña) VALUES (%s, %s, %s)"
-        parametros = nombre, correo, contrasenaEncriptada
+        parametros = (nombre, correo, contrasenaEncriptada,)
         connection.conectar()
         resultado = connection.consultaDB(query, 1, parametros)
         connection.desconectar()

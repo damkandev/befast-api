@@ -215,6 +215,11 @@ function btnVer() {
         );
 
         $("#avatar").attr("src", response.avatar);
+        $("#btn-atrasos").attr({
+          "href":`atrasos.html?estudiante=${response.estudiante_rut}`,
+          "target": "iframe"
+        })
+
       }
       updateFicha();
     },

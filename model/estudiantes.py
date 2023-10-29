@@ -30,6 +30,16 @@ class estudiantes:
         resultado = conexionBD.consultaDB(query, tipoConsulta, parametros)
         conexionBD.desconectar()
         return resultado
+    
+    def buscarEstudiantePorRut(rut):
+        query = "select idestudiante from estudiante where rut = %s"
+        parametros = (rut,)
+        tipoConsulta = 2
+        conexionBD = Conecction()
+        conexionBD.conectar()
+        resultado = conexionBD.consultaDB(query, tipoConsulta, parametros)
+        conexionBD.desconectar()
+        return resultado
 
     def buscarApoderadoPorRut(rut):
         query = "select idapoderado from apoderado where rut = %s"

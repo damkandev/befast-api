@@ -8,6 +8,18 @@ function secondsToString(seconds) {
   return hour + ':' + minute;
 }
 
+var params = new URLSearchParams(window.location.search)
+var estudiante = params.get("estudiante")
+
+if(estudiante == null){
+  updateTable(false, "")
+  console.log("null")
+} else {
+  updateTable(true, estudiante)
+  console.log("cosas", estudiante)
+  $("#searachinpt").attr("placeholder", estudiante)
+
+}
 
 function updateTable(search, termino) {
   if(search === false){
@@ -99,7 +111,6 @@ function updateTable(search, termino) {
   
 }
 
-updateTable(false, "")
 
 document.addEventListener("DOMContentLoaded", function(){
   function captarInput(){
@@ -121,19 +132,42 @@ document.addEventListener("DOMContentLoaded", function(){
   captarInput()
 })
 
+async function buscarRUT(rut) {
+  var url = `http://127.0.0.1:8000/api/estudianterut/${rut}`
 
+  try {
+    var response = await $.ajax({
+      url: url,
+      type: "GET",
+      contentType: "application/json; charset=utf8",
+      dataType: "json",
+    });
+
+    resultado = response.idestudiante
+
+    return resultado
+  } catch (error) {
+    throw error;
+  }
+}
 
 
 $("#crearEstudianteBtn").click(async () => {
-  var nivel = $("#nivel").val();
-  var letra = $("#letra").val();
+  var rutestudiante = $("#rutestudiante").val();
+  var fecha = $("#fecha").val();
+  var hora = $("#hora").val()
+
+  var idestudiante = await buscarRUT(rutestudiante)
+  console.log(idestudiante)
 
   var datos = {
-    nivel: nivel,
-    letra: letra,
+    idestudiante: idestudiante,
+    fecha: fecha,
+    hora: hora,
   };
+
   var response = await $.ajax({
-    url: "http://localhost:8000/api/cursos/",
+    url: "http://localhost:8000/api/atraso/",
     type: "POST",
     contentType: "application/json; charset=utf8",
     data: JSON.stringify(datos),
@@ -141,7 +175,7 @@ $("#crearEstudianteBtn").click(async () => {
 
   console.log(response);
 
-  updateTable();
+  updateTable(false, "")
 });
 
 function btnVer() {

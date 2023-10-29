@@ -12,7 +12,7 @@ class atrasos:
         return resultado
 
     def buscarAtraso(termino):
-        query = f"SELECT e.nombres, e.apellido_p, e.apellido_m, c.nivel, c.letra, e.rut, e.avatar, a.fecha, a.hora, a.idatraso, a.idestudiante FROM atrasos a LEFT JOIN estudiante e ON a.idestudiante = e.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso WHERE e.nombres LIKE '%{termino}%' OR e.apellido_p LIKE '%{termino}%' OR e.apellido_m LIKE '%{termino}%' OR e.rut LIKE '%{termino}%';"
+        query = f"SELECT e.nombres, e.apellido_p, e.apellido_m, c.nivel, c.letra, e.rut, e.avatar, a.fecha, a.hora, a.idatraso, a.idestudiante FROM atrasos a LEFT JOIN estudiante e ON a.idestudiante = e.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso WHERE e.nombres LIKE '%{termino}%' OR e.apellido_p LIKE '%{termino}%' OR e.apellido_m LIKE '%{termino}%' OR e.rut LIKE '%{termino}%' or concat(c.nivel, c.letra) like '%{termino}%'"
         parametros = {(termino, termino, termino, termino,)}
         tipoConsulta = 2
         conexionBD = Conecction()
@@ -21,16 +21,25 @@ class atrasos:
         conexionBD.desconectar()
         return resultado
 
+    def buscarAtrasoId(id):
+        query = "SELECT e.nombres, e.apellido_p, e.apellido_m, c.nivel, c.letra, e.rut, e.avatar, a.fecha, a.hora, a.idatraso, a.idestudiante FROM atrasos a LEFT JOIN estudiante e ON a.idestudiante = e.idestudiante LEFT JOIN curso c ON e.idcurso = c.idcurso where a.idatraso = %s"
+        parametros = (id,)
+        tipoConsulta = 2
+        conexionBD = Conecction()
+        conexionBD.conectar()
+        resultado = conexionBD.consultaDB(query, tipoConsulta, parametros)
+        conexionBD.desconectar()
+        return resultado
+
+
     def crearAtraso(
-        idcurso,
         idestudiante,
-        idinspector,
-        fecha_atraso,
-        hora_atraso,
+        fecha,
+        hora,
     ):
-        query = "INSERT INTO atraso (idcurso, idestudiante, idinspector, fecha_atraso, hora_atraso) VALUES (%s,%s,%s,%s,%s);"
+        query = "INSERT INTO atrasos (idestudiante, fecha, hora) VALUES (%s,%s,%s);"
         tipoConsulta = 1
-        parametros = (idcurso, idestudiante, idinspector, fecha_atraso, hora_atraso)
+        parametros = (idestudiante, fecha, hora,)
         conexionBD = Conecction()
         conexionBD.conectar()
         try:
@@ -39,6 +48,8 @@ class atrasos:
         except Exception as error:
             print("Ha ocurrido un problema en la inserción", error)
         conexionBD.desconectar()
+
+
 
     def editarAtraso(
         idcurso, idestudiante, idinspector, fecha_atraso, hora_atraso, idatraso

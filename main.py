@@ -32,14 +32,6 @@ app.add_middleware(
 def raiz():
     return {"Hola": "BeFast"}
 
-
-# Registrar Usuario
-@app.post("/api/usuario")
-async def registrarUsuario(request: Request):
-    datos = await request.json()
-    nombre = str()
-
-
 # Inicio de Sesión
 @app.post("/api/login")
 async def login(request: Request):
@@ -49,25 +41,21 @@ async def login(request: Request):
     resultado = Usuarios.iniciarSesion(correo, contrasena)
     return resultado
 
-
 # Estudiantes
 @app.get("/api/estudiantes")
 def buscarEstudiantes():
     estudiantes = handleEstudiantes.buscarEstudiantes()
     return estudiantes
 
-
 @app.get("/api/estudiante/{id}")
 def buscarEstudiante(id):
     estudianteBuscado = handleEstudiantes.buscarEstudiante(id)
     return estudianteBuscado
 
-
 @app.get("/api/estudianteyapoderado/{id}")
 def buscarEYA(id):
     eyabuscado = handleEstudiantes.buscarEstudianteYApoderados(id)
     return eyabuscado
-
 
 @app.post("/api/estudiante")
 async def crearEstudiante(request: Request):
@@ -99,7 +87,6 @@ async def crearEstudiante(request: Request):
     )
     return datos
 
-
 @app.put("/api/estudiante/{id}")
 async def editarEstudiante(request: Request):
     datos = await request.json()
@@ -130,7 +117,6 @@ async def editarEstudiante(request: Request):
         )
     )
     return datos
-
 
 @app.delete("/api/estudiante/{id}")
 async def eliminarEstudiante(request: Request):
@@ -382,4 +368,34 @@ def buscarAtrasos():
 def buscarAtraso(term):
     atrasos = handleAtrasos.buscarAtraso(term)
     return atrasos
+
+@app.get("/api/atrasoid/{id}")
+def buscarAtraso(id):
+    atrasos = handleAtrasos.buscarAtrasoId(id)
+    return atrasos
+
+@app.get("/api/atrasopdf/{id}")
+def descargarAtraso(id):
+    atraso = handleAtrasos.buscarAtraso()
+
+@app.get("/api/estudianterut/{rut}")
+def buscarestudianterut(rut):
+    estudiante = handleEstudiantes.buscarEstudiantePorRut(rut)
+    return estudiante
+
+@app.post("/api/atraso")
+async def crearAtraso(request: Request):
+    datos = await request.json()
+    idestudiante = str(datos["idestudiante"])
+    fecha = str(datos["fecha"])
+    hora = str(datos["hora"])
+    print(datos)
+    print(
+        atrasos.crearAtraso(
+            idestudiante,
+            fecha,
+            hora,
+        )
+    )
+    return datos
 

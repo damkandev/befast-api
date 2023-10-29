@@ -25,7 +25,7 @@
     <div class="container">
       <div class="row" id="card-container">
         <div class="busqueda">
-          <input type="search" id="searachinpt">
+          <input type="search" placeholder="Busca atrasos por RUT, Nombre, Apellidos o Curso" id="searachinpt">
           <button>Buscar</button>
         </div>
         <button type="button" class="btn btn-primary" id="buttoncrearcurso" data-bs-toggle="modal"
@@ -53,11 +53,14 @@
           <div class="modal-body">
             <p>Para crear un <b>Atraso</b> rellena los siguientes campos que tendras a continuación:</p>
             <form action="crear">
-              <label for="nombres">Nivel: </label>
-              <input class="form-control" type="text" name="nombres" id="nivel">
+              <label for="nombres">RUT Estudiante: </label>
+              <input class="form-control" type="text" name="nombres" id="rutestudiante">
 
-              <label for="nombres">Letra: </label>
-              <input class="form-control" type="text" name="nombres" id="letra">
+              <label for="nombres">Fecha: </label>
+              <input class="form-control" type="date" name="nombres" id="fecha">
+
+              <label for="nombres">Hora: </label>
+              <input class="form-control" type="time" name="nombres" id="hora">
 
               <button type="button" class="btn btn-primary" id="crearEstudianteBtn">Crear Estudiante</button>
             </form>
